@@ -525,10 +525,15 @@ body {
       <button class="tog bull" onclick="pick(this,'trend','bull')">▲ BULLISH</button>
       <button class="tog bear" onclick="pick(this,'trend','bear')">▼ BEARISH</button>
     </div>
-    <div class="field-label" style="margin-top:10px">Ichimoku Cloud</div>
+    <div class="field-label" style="margin-top:10px">50% Fib Level</div>
     <div class="tog-row">
-      <button class="tog bull" onclick="pick(this,'fib50','above')">▲ Over Ichimoku</button>
-      <button class="tog bear" onclick="pick(this,'fib50','below')">▼ Under Ichimoku</button>
+      <button class="tog bull" onclick="pick(this,'fib50','above')">▲ Above 50% Fib</button>
+      <button class="tog bear" onclick="pick(this,'fib50','below')">▼ Below 50% Fib</button>
+    </div>
+    <div class="field-label" style="margin-top:10px">Ichimoku</div>
+    <div class="tog-row">
+      <button class="tog bull" onclick="pick(this,'ichimoku','above')">▲ Over Ichimoku</button>
+      <button class="tog bear" onclick="pick(this,'ichimoku','below')">▼ Under Ichimoku</button>
     </div>
     <div class="field-label" style="margin-top:10px">Prev Day High / Low</div>
     <div class="tog-row">
@@ -857,7 +862,7 @@ body {
 <script>
 const S = {
   trend:null, action:null, entry:null,
-  fib50:null, pdhl:null, adx:null, delta:null, oi_confirm:null, risk:null, riskmode:null,
+  fib50:null, pdhl:null, adx:null, delta:null, oi_confirm:null, risk:null, riskmode:null, ichimoku:null,
   sig:[], tf:[], cat:[],
   t_ema:null, t_macd:null, f_dir:null,
   sk_bull_tf:[], sk_bull_sig:[], sk_bear_tf:[], sk_bear_sig:[],
@@ -1092,8 +1097,10 @@ function updateGameplan() {
 
   const tC = S.trend === 'bull' ? 'bull' : S.trend === 'bear' ? 'bear' : '';
   const tT = S.trend === 'bull' ? '▲ BULLISH' : S.trend === 'bear' ? '▼ BEARISH' : '—';
-  const fib50T = S.fib50 === 'above' ? '▲ Over Ichimoku' : S.fib50 === 'below' ? '▼ Under Ichimoku' : '—';
+  const fib50T = S.fib50 === 'above' ? '▲ Above 50% Fib' : S.fib50 === 'below' ? '▼ Below 50% Fib' : '—';
   const fib50C = S.fib50 === 'above' ? 'bull' : S.fib50 === 'below' ? 'bear' : '';
+  const ichiT  = S.ichimoku === 'above' ? '▲ Over Ichimoku' : S.ichimoku === 'below' ? '▼ Under Ichimoku' : '—';
+  const ichiC  = S.ichimoku === 'above' ? 'bull' : S.ichimoku === 'below' ? 'bear' : '';
   const pdhlT = S.pdhl === 'abovehigh' ? '▲ Above PDH' : S.pdhl === 'belowlow' ? '▼ Below PDL' : S.pdhl === 'between' ? '↔ Between PDH/PDL' : '—';
   const pdhlC = S.pdhl === 'abovehigh' ? 'bull' : S.pdhl === 'belowlow' ? 'bear' : '';
   const aC = S.action === 'squeeze' ? 'sqz' : S.action === 'expansion' ? 'exp' : S.action === 'fired' ? 'bull' : '';
@@ -1137,7 +1144,8 @@ function updateGameplan() {
     <div class="gp-row" style="margin-bottom:8px"><span class="gp-key">CONDITIONS</span><span class="gp-val ${rmC}">${rmT}</span></div>
     <hr class="gp-divider">
     <div class="gp-row"><span class="gp-key">TREND</span><span class="gp-val ${tC}">${tT}</span></div>
-    <div class="gp-row"><span class="gp-key">ICHIMOKU</span><span class="gp-val ${fib50C}">${fib50T}</span></div>
+    <div class="gp-row"><span class="gp-key">ICHIMOKU</span><span class="gp-val ${ichiC}">${ichiT}</span></div>
+    <div class="gp-row"><span class="gp-key">50% FIB</span><span class="gp-val ${fib50C}">${fib50T}</span></div>
     <div class="gp-row"><span class="gp-key">PDH/PDL</span><span class="gp-val ${pdhlC}">${pdhlT}</span></div>
     <hr class="gp-divider">
     <div class="gp-row"><span class="gp-key">PRICE ACTION</span><span class="gp-val ${aC}">${aT}</span></div>
@@ -1210,7 +1218,7 @@ function saveToJournal() {
 }
 
 function resetGameplan() {
-  ['trend','action','fib50','pdhl','adx','delta','oi_confirm','entry','risk','riskmode'].forEach(k => S[k] = null);
+  ['trend','action','fib50','ichimoku','pdhl','adx','delta','oi_confirm','entry','risk','riskmode'].forEach(k => S[k] = null);
   S.tf = []; S.sig = []; S._grade = null;
   document.querySelectorAll('#gameplan .tog').forEach(b => b.classList.remove('on'));
   // Reset squeeze buttons visual state
@@ -1311,7 +1319,7 @@ function snapshotGameplan() {
     target:   document.getElementById('gp_target').value || '',
     contract: document.getElementById('gp_contract') ? document.getElementById('gp_contract').value : '',
     riskmode: S.riskmode,
-    trend:    S.trend, fib50: S.fib50, pdhl: S.pdhl,
+    trend:    S.trend, fib50: S.fib50, ichimoku: S.ichimoku, pdhl: S.pdhl,
     action:   S.action, tf: [...S.tf], adx: S.adx,
     em:       document.getElementById('gp_em').value || '',
     over:     document.getElementById('gp_over').value || '',
@@ -1499,7 +1507,8 @@ function renderJournal() {
     if (e.gp && (e.gp.trend || e.gp.action || e.gp.entry || e.gp.ticker)) {
       const g = e.gp;
       const trendT  = g.trend === 'bull' ? '<span style="color:var(--cyan)">▲ Bullish</span>' : g.trend === 'bear' ? '<span style="color:var(--magenta)">▼ Bearish</span>' : '—';
-      const fib50T  = g.fib50 === 'above' ? '<span style="color:var(--cyan)">▲ Over Ichimoku</span>' : g.fib50 === 'below' ? '<span style="color:var(--magenta)">▼ Under Ichimoku</span>' : '—';
+      const fib50T  = g.fib50 === 'above' ? '<span style="color:var(--cyan)">▲ Above 50% Fib</span>' : g.fib50 === 'below' ? '<span style="color:var(--magenta)">▼ Below 50% Fib</span>' : '—';
+      const ichiT   = g.ichimoku === 'above' ? '<span style="color:var(--cyan)">▲ Over Ichimoku</span>' : g.ichimoku === 'below' ? '<span style="color:var(--magenta)">▼ Under Ichimoku</span>' : '—';
       const pdhlT   = g.pdhl === 'abovehigh' ? '<span style="color:var(--cyan)">▲ Above PDH</span>' : g.pdhl === 'belowlow' ? '<span style="color:var(--magenta)">▼ Below PDL</span>' : g.pdhl === 'between' ? '↔ Between' : '—';
       const actionT = g.action === 'squeeze' ? '<span style="color:var(--yellow)">⚡ In a Squeeze (' + (g.tf||[]).join(', ') + ')</span>'
                     : g.action === 'fired'   ? '<span style="color:var(--green)">🚀 Fired Out (' + (g.tf||[]).join(', ') + ')</span>'
@@ -1521,7 +1530,8 @@ function renderJournal() {
           </div>
           <div style="display:flex;gap:6px;margin-bottom:2px;"><span style="color:var(--muted);min-width:80px;font-size:9px;letter-spacing:1px;">CONDITIONS</span>${rmT}</div>
           <div style="display:flex;gap:6px;margin-bottom:2px;"><span style="color:var(--muted);min-width:80px;font-size:9px;letter-spacing:1px;">TREND</span>${trendT}</div>
-          <div style="display:flex;gap:6px;margin-bottom:2px;"><span style="color:var(--muted);min-width:80px;font-size:9px;letter-spacing:1px;">ICHIMOKU</span>${fib50T}</div>
+          <div style="display:flex;gap:6px;margin-bottom:2px;"><span style="color:var(--muted);min-width:80px;font-size:9px;letter-spacing:1px;">50% FIB</span>${fib50T}</div>
+          <div style="display:flex;gap:6px;margin-bottom:2px;"><span style="color:var(--muted);min-width:80px;font-size:9px;letter-spacing:1px;">ICHIMOKU</span>${ichiT}</div>
           <div style="display:flex;gap:6px;margin-bottom:2px;"><span style="color:var(--muted);min-width:80px;font-size:9px;letter-spacing:1px;">PDH/PDL</span>${pdhlT}</div>
           <div style="height:1px;background:var(--border);margin:5px 0;"></div>
           <div style="display:flex;gap:6px;margin-bottom:2px;"><span style="color:var(--muted);min-width:80px;font-size:9px;letter-spacing:1px;">PRICE ACTION</span>${actionT}</div>
