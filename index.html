@@ -491,6 +491,7 @@ body {
   </div>
 
 <button class="btn btn-fire" onclick="saveTrifectaJournal()">🔥 Save to Journal</button>
+<button class="btn btn-ghost" onclick="resetTrifecta()">↺ Reset Trifecta</button>
 
 </div>
 
@@ -1215,6 +1216,27 @@ function saveToJournal() {
   if (target) document.getElementById('j_target_price').value = target;
   S._pendingGP = snapshotGameplan();
   showTab('journal', document.querySelectorAll('.tab')[2]);
+}
+
+function resetTrifecta() {
+  S.triConf = [null, null, null];
+  S.f_dir = null;
+  S.sk_bull_tf = []; S.sk_bull_sig = [];
+  S.sk_bear_tf = []; S.sk_bear_sig = [];
+  S.cat = [];
+  // Clear all toggles in trifecta tab
+  document.querySelectorAll('#trifecta .tog').forEach(b => b.classList.remove('on'));
+  // Reset tri items visual state
+  for (let i = 0; i < 3; i++) {
+    document.getElementById('tri' + i).classList.remove('confirmed');
+    document.getElementById('triCheck' + i).textContent = '—';
+  }
+  // Clear text inputs
+  ['tf_ticker','tf_price','f_callvol','f_putvol','f_catalyst'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.value = '';
+  });
+  document.getElementById('flowRatio').textContent = '';
+  updateTrifecta();
 }
 
 function resetGameplan() {
