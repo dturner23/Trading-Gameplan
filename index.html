@@ -525,10 +525,10 @@ body {
       <button class="tog bull" onclick="pick(this,'trend','bull')">▲ BULLISH</button>
       <button class="tog bear" onclick="pick(this,'trend','bear')">▼ BEARISH</button>
     </div>
-    <div class="field-label" style="margin-top:10px">50% Fib Level</div>
+    <div class="field-label" style="margin-top:10px">Ichimoku Cloud</div>
     <div class="tog-row">
-      <button class="tog bull" onclick="pick(this,'fib50','above')">▲ Above 50% Fib</button>
-      <button class="tog bear" onclick="pick(this,'fib50','below')">▼ Below 50% Fib</button>
+      <button class="tog bull" onclick="pick(this,'fib50','above')">▲ Over Ichimoku</button>
+      <button class="tog bear" onclick="pick(this,'fib50','below')">▼ Under Ichimoku</button>
     </div>
     <div class="field-label" style="margin-top:10px">Prev Day High / Low</div>
     <div class="tog-row">
@@ -697,7 +697,7 @@ body {
   <!-- DYNAMIC STATS BAR -->
   <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:14px;">
     <div class="card" style="padding:10px; text-align:center;">
-      <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;color:var(--muted)">TOTAL ROI</div>
+      <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;color:var(--muted)">TOTAL P&L</div>
       <div style="font-family:'Orbitron',monospace;font-size:16px;font-weight:700;margin-top:4px" id="statPnl">—</div>
     </div>
     <div class="card" style="padding:10px; text-align:center;">
@@ -1092,7 +1092,7 @@ function updateGameplan() {
 
   const tC = S.trend === 'bull' ? 'bull' : S.trend === 'bear' ? 'bear' : '';
   const tT = S.trend === 'bull' ? '▲ BULLISH' : S.trend === 'bear' ? '▼ BEARISH' : '—';
-  const fib50T = S.fib50 === 'above' ? '▲ Above 50% Fib' : S.fib50 === 'below' ? '▼ Below 50% Fib' : '—';
+  const fib50T = S.fib50 === 'above' ? '▲ Over Ichimoku' : S.fib50 === 'below' ? '▼ Under Ichimoku' : '—';
   const fib50C = S.fib50 === 'above' ? 'bull' : S.fib50 === 'below' ? 'bear' : '';
   const pdhlT = S.pdhl === 'abovehigh' ? '▲ Above PDH' : S.pdhl === 'belowlow' ? '▼ Below PDL' : S.pdhl === 'between' ? '↔ Between PDH/PDL' : '—';
   const pdhlC = S.pdhl === 'abovehigh' ? 'bull' : S.pdhl === 'belowlow' ? 'bear' : '';
@@ -1137,7 +1137,7 @@ function updateGameplan() {
     <div class="gp-row" style="margin-bottom:8px"><span class="gp-key">CONDITIONS</span><span class="gp-val ${rmC}">${rmT}</span></div>
     <hr class="gp-divider">
     <div class="gp-row"><span class="gp-key">TREND</span><span class="gp-val ${tC}">${tT}</span></div>
-    <div class="gp-row"><span class="gp-key">50% FIB</span><span class="gp-val ${fib50C}">${fib50T}</span></div>
+    <div class="gp-row"><span class="gp-key">ICHIMOKU</span><span class="gp-val ${fib50C}">${fib50T}</span></div>
     <div class="gp-row"><span class="gp-key">PDH/PDL</span><span class="gp-val ${pdhlC}">${pdhlT}</span></div>
     <hr class="gp-divider">
     <div class="gp-row"><span class="gp-key">PRICE ACTION</span><span class="gp-val ${aC}">${aT}</span></div>
@@ -1409,14 +1409,44 @@ function updateStats(entries) {
   const losses = entries.filter(e => e.outcome === 'loss').length;
   const total  = entries.length;
   const wr     = total > 0 ? Math.round(wins / total * 100) : 0;
-  const totalROI = entries.reduce((sum, e) => {
-    const r = parseFloat(e.roi);
-    return sum + (isNaN(r) ? 0 : r);
-  }, 0);
-  document.getElementById('statPnl').textContent   = (totalROI >= 0 ? '+' : '') + totalROI.toFixed(0) + '%';
-  document.getElementById('statPnl').style.color   = totalROI >= 0 ? 'var(--green)' : 'var(--red)';
-  document.getElementById('statWR').textContent    = wr + '%';
-  document.getElementById('statTrades').textContent= wins + 'W / ' + losses + 'L';
+
+  // Calculate total P&L from entry/exit prices (per contract × 100 shares)
+  let totalPnl = 0;
+  let hasPrices = false;
+  entries.forEach(e => {
+    const entry = parseFloat(e.entryPrice);
+    const exit  = parseFloat(e.exitPrice);
+    if (!isNaN(entry) && !isNaN(exit) && entry > 0) {
+      // Extract quantity from contract string if present (e.g. "× 5" or "x5")
+      let qty = 1;
+      if (e.contract) {
+        const qtyMatch = e.contract.match(/[×x]\s*(\d+)/i);
+        if (qtyMatch) qty = parseInt(qtyMatch[1]);
+      }
+      totalPnl += (exit - entry) * 100 * qty;
+      hasPrices = true;
+    }
+  });
+
+  const pnlEl = document.getElementById('statPnl');
+  if (hasPnl = hasPrices) {
+    const formatted = (totalPnl >= 0 ? '+$' : '-$') + Math.abs(totalPnl).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+    pnlEl.textContent = formatted;
+    pnlEl.style.color = totalPnl >= 0 ? 'var(--green)' : 'var(--red)';
+    pnlEl.style.fontSize = '13px';
+  } else {
+    // Fall back to ROI% if no prices entered
+    const totalROI = entries.reduce((sum, e) => {
+      const r = parseFloat(e.roi);
+      return sum + (isNaN(r) ? 0 : r);
+    }, 0);
+    pnlEl.textContent = (totalROI >= 0 ? '+' : '') + totalROI.toFixed(0) + '%';
+    pnlEl.style.color = totalROI >= 0 ? 'var(--green)' : 'var(--red)';
+    pnlEl.style.fontSize = '16px';
+  }
+
+  document.getElementById('statWR').textContent     = wr + '%';
+  document.getElementById('statTrades').textContent = wins + 'W / ' + losses + 'L';
 }
 
 function renderJournal() {
@@ -1469,7 +1499,7 @@ function renderJournal() {
     if (e.gp && (e.gp.trend || e.gp.action || e.gp.entry || e.gp.ticker)) {
       const g = e.gp;
       const trendT  = g.trend === 'bull' ? '<span style="color:var(--cyan)">▲ Bullish</span>' : g.trend === 'bear' ? '<span style="color:var(--magenta)">▼ Bearish</span>' : '—';
-      const fib50T  = g.fib50 === 'above' ? '<span style="color:var(--cyan)">▲ Above 50% Fib</span>' : g.fib50 === 'below' ? '<span style="color:var(--magenta)">▼ Below 50% Fib</span>' : '—';
+      const fib50T  = g.fib50 === 'above' ? '<span style="color:var(--cyan)">▲ Over Ichimoku</span>' : g.fib50 === 'below' ? '<span style="color:var(--magenta)">▼ Under Ichimoku</span>' : '—';
       const pdhlT   = g.pdhl === 'abovehigh' ? '<span style="color:var(--cyan)">▲ Above PDH</span>' : g.pdhl === 'belowlow' ? '<span style="color:var(--magenta)">▼ Below PDL</span>' : g.pdhl === 'between' ? '↔ Between' : '—';
       const actionT = g.action === 'squeeze' ? '<span style="color:var(--yellow)">⚡ In a Squeeze (' + (g.tf||[]).join(', ') + ')</span>'
                     : g.action === 'fired'   ? '<span style="color:var(--green)">🚀 Fired Out (' + (g.tf||[]).join(', ') + ')</span>'
@@ -1491,7 +1521,7 @@ function renderJournal() {
           </div>
           <div style="display:flex;gap:6px;margin-bottom:2px;"><span style="color:var(--muted);min-width:80px;font-size:9px;letter-spacing:1px;">CONDITIONS</span>${rmT}</div>
           <div style="display:flex;gap:6px;margin-bottom:2px;"><span style="color:var(--muted);min-width:80px;font-size:9px;letter-spacing:1px;">TREND</span>${trendT}</div>
-          <div style="display:flex;gap:6px;margin-bottom:2px;"><span style="color:var(--muted);min-width:80px;font-size:9px;letter-spacing:1px;">50% FIB</span>${fib50T}</div>
+          <div style="display:flex;gap:6px;margin-bottom:2px;"><span style="color:var(--muted);min-width:80px;font-size:9px;letter-spacing:1px;">ICHIMOKU</span>${fib50T}</div>
           <div style="display:flex;gap:6px;margin-bottom:2px;"><span style="color:var(--muted);min-width:80px;font-size:9px;letter-spacing:1px;">PDH/PDL</span>${pdhlT}</div>
           <div style="height:1px;background:var(--border);margin:5px 0;"></div>
           <div style="display:flex;gap:6px;margin-bottom:2px;"><span style="color:var(--muted);min-width:80px;font-size:9px;letter-spacing:1px;">PRICE ACTION</span>${actionT}</div>
