@@ -792,6 +792,14 @@ body {
     <input id="f_ticker" class="field" placeholder="Filter ticker..." style="width:110px;margin-top:0;padding:6px 10px;font-size:11px;" oninput="filterByTicker(this.value)">
   </div>
 
+  <div style="display:flex; gap:6px; margin-bottom:12px;">
+    <button onclick="exportJournal()" style="flex:1;padding:10px;border-radius:5px;border:1px solid rgba(0,119,204,0.3);background:rgba(0,119,204,0.06);color:var(--cyan);font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;cursor:pointer;">⬇ EXPORT TRADES</button>
+    <label style="flex:1;padding:10px;border-radius:5px;border:1px solid rgba(0,168,85,0.3);background:rgba(0,168,85,0.06);color:var(--green);font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;cursor:pointer;text-align:center;">
+      ⬆ IMPORT TRADES
+      <input type="file" accept=".json" onchange="importJournal(event)" style="display:none;">
+    </label>
+  </div>
+
   <div class="slabel">Trade Log</div>
   <div id="journalList"></div>
 </div>
@@ -1216,6 +1224,46 @@ function saveToJournal() {
   if (target) document.getElementById('j_target_price').value = target;
   S._pendingGP = snapshotGameplan();
   showTab('journal', document.querySelectorAll('.tab')[2]);
+}
+
+// ── Export / Import ───────────────────────────────────────────────
+function exportJournal() {
+  if (!S.journal.length) { alert('No trades to export yet.'); return; }
+  const data = JSON.stringify(S.journal, null, 2);
+  const blob = new Blob([data], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  const date = new Date().toISOString().split('T')[0];
+  a.href     = url;
+  a.download = 'trading-journal-' + date + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importJournal(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const imported = JSON.parse(e.target.result);
+      if (!Array.isArray(imported)) { alert('Invalid file format.'); return; }
+      // Merge: add imported entries that don't already exist (by id)
+      const existingIds = new Set(S.journal.map(j => j.id));
+      const newEntries  = imported.filter(j => !existingIds.has(j.id));
+      S.journal = [...newEntries, ...S.journal];
+      // Sort by id descending (newest first)
+      S.journal.sort((a, b) => b.id - a.id);
+      saveJournal();
+      renderJournal();
+      alert('✓ Imported ' + newEntries.length + ' new trade' + (newEntries.length !== 1 ? 's' : '') + '.');
+    } catch(err) {
+      alert('Could not read file. Make sure it\'s a valid journal export.');
+    }
+  };
+  reader.readAsText(file);
+  // Reset input so same file can be re-imported if needed
+  event.target.value = '';
 }
 
 function resetTrifecta() {
