@@ -8,10 +8,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f0f2f8;
-    --surface: #e4e7f0;
-    --card: #ffffff;
-    --border: #c8cde0;
+    --bg: #ffffff;
+    --surface: #f5f6fa;
+    --card: #fafbff;
+    --border: #e2e4f0;
     --cyan: #0077cc;
     --magenta: #cc00aa;
     --green: #00a855;
@@ -30,133 +30,121 @@ body {
   font-family: 'Share Tech Mono', monospace;
   min-height: 100vh;
   padding-bottom: 60px;
-  background-image:
-    radial-gradient(ellipse at 50% -20%, rgba(0,119,204,0.06) 0%, transparent 55%),
-    radial-gradient(ellipse at 100% 80%, rgba(204,0,170,0.04) 0%, transparent 50%);
 }
 
 .header {
-  padding: 20px 16px 14px;
+  padding: 18px 16px 12px;
   text-align: center;
-  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(0,119,204,0.07) 0%, rgba(204,0,170,0.05) 100%);
+  border-bottom: 2px solid;
+  border-image: linear-gradient(90deg, var(--cyan), var(--magenta)) 1;
 }
 
 .fire-badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(255,107,0,0.1);
-  border: 1px solid rgba(255,107,0,0.3);
-  border-radius: 4px;
-  padding: 3px 10px;
-  font-size: 10px;
+  background: linear-gradient(90deg, rgba(0,119,204,0.12), rgba(204,0,170,0.1));
+  border: 1px solid rgba(0,119,204,0.3);
+  border-radius: 20px;
+  padding: 3px 14px;
+  font-size: 9px;
   letter-spacing: 2px;
-  color: var(--orange);
+  color: var(--cyan);
   margin-bottom: 8px;
 }
 
 .header h1 {
   font-family: 'Orbitron', monospace;
-  font-size: clamp(20px, 5.5vw, 38px);
+  font-size: clamp(15px, 4vw, 28px);
   font-weight: 900;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   background: linear-gradient(90deg, var(--cyan), var(--magenta));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.date-line { font-size: 10px; color: var(--muted); letter-spacing: 2px; margin-top: 6px; }
+.date-line { font-size: 9px; color: var(--muted); letter-spacing: 2px; margin-top: 5px; }
 
 .tabs {
   display: flex;
-  background: var(--surface);
+  background: white;
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
 .tab {
   flex: 1;
-  padding: 13px 4px;
+  padding: 14px 4px;
   text-align: center;
   font-family: 'Orbitron', monospace;
-  font-size: 8px;
+  font-size: 9px;
   letter-spacing: 1px;
   color: var(--muted);
   cursor: pointer;
-  border-bottom: 2px solid transparent;
+  border-bottom: 3px solid transparent;
   transition: all 0.2s;
   text-transform: uppercase;
 }
-.tab.active { color: var(--cyan); border-bottom-color: var(--cyan); background: rgba(0,229,255,0.04); }
+.tab.active {
+  color: var(--cyan);
+  border-bottom-color: var(--cyan);
+  background: rgba(0,119,204,0.03);
+}
 
-.page { display: none; padding: 14px; }
+.page { display: none; padding: 12px 14px; }
 .page.active { display: block; }
 
-.ticker-bar { display: flex; gap: 8px; margin-bottom: 14px; align-items: center; }
-
 .ticker-input {
-  flex: 1;
   background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
   color: var(--cyan);
   font-family: 'Orbitron', monospace;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   text-transform: uppercase;
   outline: none;
   transition: border-color 0.2s;
+  width: 100%;
+  min-width: 0;
 }
-.ticker-input::placeholder { color: var(--muted); font-size: 14px; }
-.ticker-input:focus { border-color: var(--cyan); }
-
-.price-input {
-  width: 110px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 10px 10px;
-  color: var(--yellow);
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 14px;
-  letter-spacing: 1px;
-  outline: none;
-  transition: border-color 0.2s;
-}
-.price-input::placeholder { color: var(--muted); font-size: 12px; }
-.price-input:focus { border-color: var(--yellow); }
+.ticker-input::placeholder { color: var(--muted); font-size: 12px; }
+.ticker-input:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(0,119,204,0.1); }
 
 .slabel {
   font-family: 'Orbitron', monospace;
   font-size: 8px;
   letter-spacing: 3px;
-  color: var(--muted);
+  color: var(--cyan);
   text-transform: uppercase;
   margin: 16px 0 10px;
   display: flex;
   align-items: center;
   gap: 8px;
 }
-.slabel::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.slabel::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(0,119,204,0.4), rgba(204,0,170,0.2), transparent); }
 
 .card {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 14px;
   margin-bottom: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
 }
 
 .card-title {
   font-family: 'Orbitron', monospace;
   font-size: 9px;
   letter-spacing: 2px;
-  color: var(--text);
+  color: var(--cyan);
   margin-bottom: 12px;
   display: flex;
   align-items: center;
@@ -164,47 +152,46 @@ body {
 }
 
 .step-pill {
-  background: var(--border);
-  border-radius: 3px;
+  background: linear-gradient(90deg, rgba(0,119,204,0.12), rgba(204,0,170,0.08));
+  border-radius: 4px;
   padding: 2px 8px;
   font-size: 9px;
-  color: var(--muted);
+  color: var(--cyan);
+  border: 1px solid rgba(0,119,204,0.2);
 }
 
 .tog-row { display: flex; gap: 6px; flex-wrap: wrap; }
 
 .tog {
-  padding: 8px 13px;
-  border-radius: 4px;
-  border: 1px solid var(--border);
-  background: transparent;
+  padding: 7px 12px;
+  border-radius: 6px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
   color: var(--muted);
   font-family: 'Share Tech Mono', monospace;
-  font-size: 12px;
+  font-size: 11px;
   cursor: pointer;
   transition: all 0.18s;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
 }
 
-.tog.bull.on  { border-color: var(--cyan);    color: var(--cyan);    background: rgba(0,119,204,0.08); }
+.tog.bull.on  { border-color: var(--cyan);    color: var(--cyan);    background: rgba(0,119,204,0.1); }
 .tog.bear.on  { border-color: var(--magenta); color: var(--magenta); background: rgba(204,0,170,0.08); }
-.tog.exp.on   { border-color: var(--cyan);    color: var(--cyan);    background: rgba(0,119,204,0.08); }
-.tog.sqz.on   { border-color: var(--orange);  color: var(--orange);  background: rgba(224,90,0,0.1);   }
-.tog.call.on  { border-color: var(--cyan);    color: var(--cyan);    background: rgba(0,119,204,0.08); }
+.tog.exp.on   { border-color: var(--cyan);    color: var(--cyan);    background: rgba(0,119,204,0.1); }
+.tog.sqz.on   { border-color: var(--cyan);    color: var(--cyan);    background: rgba(0,119,204,0.1); }
+.tog.call.on  { border-color: var(--cyan);    color: var(--cyan);    background: rgba(0,119,204,0.1); }
 .tog.put.on   { border-color: var(--magenta); color: var(--magenta); background: rgba(204,0,170,0.08); }
-.tog.cyn.on   { border-color: var(--cyan);    color: var(--cyan);    background: rgba(0,119,204,0.08); }
+.tog.cyn.on   { border-color: var(--cyan);    color: var(--cyan);    background: rgba(0,119,204,0.1); }
 .tog.mag.on   { border-color: var(--magenta); color: var(--magenta); background: rgba(204,0,170,0.08); }
-.tog.tf.on    { border-color: var(--cyan);    color: var(--cyan);    background: rgba(0,119,204,0.06); }
-
-/* RVOL dynamic color classes */
-.tog.rvol-call.on { border-color: var(--cyan);    color: var(--cyan);    background: rgba(0,119,204,0.08); }
+.tog.tf.on    { border-color: var(--cyan);    color: var(--cyan);    background: rgba(0,119,204,0.08); }
+.tog.rvol-call.on { border-color: var(--cyan);    color: var(--cyan);    background: rgba(0,119,204,0.1); }
 .tog.rvol-put.on  { border-color: var(--magenta); color: var(--magenta); background: rgba(204,0,170,0.08); }
 
 .field {
   width: 100%;
   background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 5px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
   padding: 9px 12px;
   color: var(--text);
   font-family: 'Share Tech Mono', monospace;
@@ -214,7 +201,7 @@ body {
   transition: border-color 0.2s;
   margin-top: 4px;
 }
-.field:focus { border-color: var(--cyan); }
+.field:focus { border-color: var(--cyan); box-shadow: 0 0 0 2px rgba(0,119,204,0.08); }
 .field::placeholder { color: var(--muted); }
 
 .field-label {
@@ -226,11 +213,11 @@ body {
   text-transform: uppercase;
 }
 
-.sqz-meter { margin-top: 10px; background: var(--surface); border-radius: 5px; height: 6px; overflow: hidden; border: 1px solid var(--border); }
-.sqz-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--orange), var(--yellow)); border-radius: 5px; transition: width 0.5s cubic-bezier(0.34,1.56,0.64,1); }
-.sqz-label { font-size: 10px; color: var(--orange); margin-top: 5px; letter-spacing: 1px; }
+.sqz-meter { margin-top: 10px; background: var(--surface); border-radius: 5px; height: 5px; overflow: hidden; border: 1px solid var(--border); }
+.sqz-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--cyan), var(--magenta)); border-radius: 5px; transition: width 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+.sqz-label { font-size: 10px; color: var(--cyan); margin-top: 5px; letter-spacing: 1px; }
 
-.tri-item { border: 1px solid var(--border); border-radius: 7px; margin-bottom: 10px; overflow: hidden; }
+.tri-item { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 10px; overflow: hidden; }
 .tri-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; cursor: pointer; background: var(--card); }
 .tri-left { display: flex; align-items: center; gap: 10px; }
 .tri-num {
@@ -246,83 +233,80 @@ body {
 .tri-name { font-family: 'Orbitron', monospace; font-size: 9px; letter-spacing: 2px; color: var(--text); }
 .tri-sub { font-size: 10px; color: var(--muted); margin-top: 2px; }
 .tri-check { width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--muted); display: flex; align-items: center; justify-content: center; font-size: 13px; transition: all 0.2s; flex-shrink: 0; }
-.tri-item.confirmed .tri-check { background: var(--green); border-color: var(--green); color: #000; }
-.tri-item.confirmed { border-color: rgba(0,255,136,0.3); }
+.tri-item.confirmed .tri-check { background: linear-gradient(135deg, var(--cyan), var(--magenta)); border-color: var(--cyan); color: #fff; }
+.tri-item.confirmed { border-color: rgba(0,119,204,0.4); }
 .tri-body { padding: 12px 14px; border-top: 1px solid var(--border); background: var(--surface); display: none; }
 
-.tri-score { display: flex; gap: 8px; margin-top: 16px; }
-.tri-dot { flex: 1; height: 8px; border-radius: 4px; background: var(--border); transition: background 0.3s; }
-.tri-dot.lit { background: var(--green); box-shadow: 0 0 8px rgba(0,255,136,0.4); }
-
-.gameplan-out {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 16px;
-  margin-top: 10px;
-  font-size: 12px;
-  line-height: 2;
-}
+.tri-score { display: flex; gap: 8px; margin-top: 14px; }
+.tri-dot { flex: 1; height: 5px; border-radius: 4px; background: var(--border); transition: background 0.3s; }
+.tri-dot.lit { background: linear-gradient(90deg, var(--cyan), var(--magenta)); }
 
 .gp-row { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; margin-bottom: 2px; }
 .gp-key { font-family: 'Orbitron', monospace; font-size: 8px; letter-spacing: 2px; color: var(--muted); min-width: 95px; flex-shrink: 0; }
 .gp-val { color: var(--text); flex: 1; }
 .gp-val.bull { color: var(--cyan); }
 .gp-val.bear { color: var(--magenta); }
-.gp-val.sqz  { color: var(--orange); }
+.gp-val.sqz  { color: var(--cyan); }
 .gp-val.exp  { color: var(--cyan); }
 .gp-val.call { color: var(--cyan); font-weight: bold; }
 .gp-val.put  { color: var(--magenta); font-weight: bold; }
 .gp-divider  { border: none; border-top: 1px solid var(--border); margin: 8px 0; }
 
-.journal-entry { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px; margin-bottom: 10px; position: relative; }
+.journal-entry {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 10px;
+  position: relative;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
 .je-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
 .je-ticker { font-family: 'Orbitron', monospace; font-size: 14px; font-weight: 700; color: var(--cyan); letter-spacing: 2px; }
 .je-date { font-size: 10px; color: var(--muted); }
-.je-badge { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 10px; letter-spacing: 1px; margin-right: 4px; margin-top: 4px; }
-.je-badge.win  { background: rgba(0,255,136,0.12); color: var(--green); border: 1px solid rgba(0,255,136,0.3); }
-.je-badge.loss { background: rgba(255,51,85,0.1);  color: var(--red);   border: 1px solid rgba(255,51,85,0.3); }
-.je-badge.be   { background: rgba(255,230,0,0.08); color: var(--yellow);border: 1px solid rgba(255,230,0,0.3); }
-.je-badge.sqz  { background: rgba(255,107,0,0.1);  color: var(--orange);border: 1px solid rgba(255,107,0,0.3); }
+.je-badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 10px; letter-spacing: 1px; margin-right: 4px; margin-top: 4px; }
+.je-badge.win  { background: rgba(0,168,85,0.1);  color: var(--green);   border: 1px solid rgba(0,168,85,0.3); }
+.je-badge.loss { background: rgba(204,0,170,0.08); color: var(--magenta); border: 1px solid rgba(204,0,170,0.3); }
+.je-badge.be   { background: rgba(204,136,0,0.08); color: var(--yellow);  border: 1px solid rgba(204,136,0,0.3); }
 .je-review { font-size: 11px; color: var(--muted); line-height: 1.6; margin-top: 8px; }
 .je-del { position: absolute; top: 10px; right: 10px; background: none; border: none; color: var(--muted); cursor: pointer; font-size: 14px; }
-.je-del:hover { color: var(--red); }
+.je-del:hover { color: var(--magenta); }
 
-.btn { display: block; width: 100%; padding: 13px; border-radius: 6px; border: none; font-family: 'Orbitron', monospace; font-size: 10px; letter-spacing: 2px; cursor: pointer; transition: all 0.2s; margin-top: 10px; }
-.btn-primary { background: linear-gradient(90deg, rgba(0,229,255,0.15), rgba(255,0,204,0.1)); border: 1px solid rgba(0,229,255,0.3); color: var(--cyan); }
-.btn-fire { background: linear-gradient(90deg, rgba(255,107,0,0.2), rgba(255,230,0,0.1)); border: 1px solid rgba(255,107,0,0.4); color: var(--orange); }
+.btn { display: block; width: 100%; padding: 13px; border-radius: 8px; border: none; font-family: 'Orbitron', monospace; font-size: 10px; letter-spacing: 2px; cursor: pointer; transition: all 0.2s; margin-top: 10px; }
+.btn-fire { background: linear-gradient(90deg, rgba(0,119,204,0.12), rgba(204,0,170,0.1)); border: 1px solid rgba(0,119,204,0.35); color: var(--cyan); }
 .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--muted); }
 
-.verdict-banner { border-radius: 8px; padding: 16px; text-align: center; margin-top: 14px; border: 1px solid var(--border); transition: all 0.4s; }
-.verdict-banner.strong { border-color: var(--green); background: rgba(0,255,136,0.06); box-shadow: 0 0 30px rgba(0,255,136,0.08); }
-.verdict-banner.fire   { border-color: var(--orange); background: rgba(255,107,0,0.06); box-shadow: 0 0 30px rgba(255,107,0,0.1); }
-.verdict-banner.wait   { border-color: var(--yellow); background: rgba(255,230,0,0.04); }
-.verdict-banner.pass   { border-color: var(--red); background: rgba(255,51,85,0.04); }
+.verdict-banner { border-radius: 8px; padding: 14px; text-align: center; margin-top: 14px; border: 1px solid var(--border); transition: all 0.4s; }
+.verdict-banner.fire   { border-color: var(--cyan);    background: rgba(0,119,204,0.05); }
+.verdict-banner.wait   { border-color: var(--yellow);  background: rgba(204,136,0,0.04); }
+.verdict-banner.pass   { border-color: var(--magenta); background: rgba(204,0,170,0.04); }
 
-.verdict-title { font-family: 'Orbitron', monospace; font-size: 22px; font-weight: 900; letter-spacing: 3px; }
+.verdict-title { font-family: 'Orbitron', monospace; font-size: 20px; font-weight: 900; letter-spacing: 3px; }
 .verdict-sub   { font-size: 10px; color: var(--muted); letter-spacing: 1px; margin-top: 4px; }
 
 .belief-box {
-  background: #f7f7fb;
-  border: 1px solid rgba(224,90,0,0.25);
-  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(0,119,204,0.04), rgba(204,0,170,0.03));
+  border: 1px solid rgba(0,119,204,0.2);
+  border-radius: 10px;
   padding: 14px;
   margin-bottom: 14px;
   font-size: 11px;
   line-height: 1.7;
-  color: #1a1a2e;
+  color: var(--text);
 }
-.belief-title { font-family: 'Orbitron', monospace; font-size: 9px; letter-spacing: 2px; color: var(--orange); margin-bottom: 8px; }
-
-.copy-btn { display: flex; align-items: center; gap: 6px; background: none; border: 1px solid var(--border); border-radius: 4px; padding: 6px 12px; color: var(--muted); font-family: 'Share Tech Mono', monospace; font-size: 10px; cursor: pointer; margin-top: 10px; transition: all 0.2s; }
-.copy-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+.belief-title { font-family: 'Orbitron', monospace; font-size: 9px; letter-spacing: 2px; color: var(--cyan); margin-bottom: 8px; }
 
 .roi-row { display: flex; gap: 8px; margin-top: 8px; align-items: center; }
-.roi-result { font-family: 'Orbitron', monospace; font-size: 16px; font-weight: 700; color: var(--green); min-width: 70px; text-align: right; }
+.roi-result { font-family: 'Orbitron', monospace; font-size: 16px; font-weight: 700; color: var(--cyan); min-width: 70px; text-align: right; }
 
-#journalList { max-height: 420px; overflow-y: auto; }
+/* contract grid - prevents overflow */
+.cgrid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+.cgrid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 8px; }
+.cgrid2 > div, .cgrid3 > div { min-width: 0; overflow: hidden; }
+
+#journalList { overflow-y: auto; }
 #journalList::-webkit-scrollbar { width: 4px; }
-#journalList::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+#journalList::-webkit-scrollbar-thumb { background: rgba(0,119,204,0.2); border-radius: 2px; }
 </style>
 
 </head>
@@ -335,467 +319,415 @@ body {
 </div>
 
 <div class="tabs">
-  <div class="tab active" onclick="showTab('trifecta',this)">⚡ TRIFECTA</div>
-  <div class="tab" onclick="showTab('gameplan',this)">📋 GAMEPLAN</div>
-  <div class="tab" onclick="showTab('journal',this)">📓 JOURNAL</div>
+  <div class="tab active" onclick="showTab('journal',this)">📓 JOURNAL</div>
   <div class="tab" onclick="showTab('belief',this)">🔥 BELIEF</div>
-</div>
-
-<!-- ══════════ TRIFECTA ══════════ -->
-
-<div class="page active" id="trifecta">
-
-  <div class="ticker-bar">
-    <input class="ticker-input" id="tf_ticker" placeholder="TICKER" maxlength="6"
-      oninput="this.value=this.value.toUpperCase(); syncFields('tf_ticker','gp_ticker',this.value); syncFields('tf_ticker','j_ticker',this.value)">
-    <input class="price-input" id="tf_price" type="number" placeholder="$ Price"
-      oninput="syncFields('tf_price','gp_price',this.value); syncFields('tf_price','j_price',this.value)">
-  </div>
-
-  <div class="belief-box" style="font-size:10px; padding:10px 12px; margin-bottom:10px;">
-    <div class="belief-title">⚡ TRIFECTA — ALL 3 REQUIRED FOR HIGHEST CONVICTION</div>
-    Technical + Flow + Fundamental = Green light to enter
-  </div>
-
-  <div class="tri-item" id="tri0">
-    <div class="tri-header" onclick="toggleTri(0)">
-      <div class="tri-left">
-        <div class="tri-num">1</div>
-        <div>
-          <div class="tri-name">TECHNICAL</div>
-          <div class="tri-sub">Skittles</div>
-        </div>
-      </div>
-      <div class="tri-check" id="triCheck0">—</div>
-    </div>
-    <div class="tri-body" id="triBody0">
-
-      <div class="field-label" style="color:var(--cyan)">🟦 BULLISH SKITTLES (select all that apply)</div>
-      <div class="field-label" style="margin-top:6px">Timeframe</div>
-      <div class="tog-row">
-        <button class="tog cyn" onclick="multiPick(this,'sk_bull_tf','2H')">2H</button>
-        <button class="tog cyn" onclick="multiPick(this,'sk_bull_tf','4H')">4H</button>
-        <button class="tog cyn" onclick="multiPick(this,'sk_bull_tf','1D')">1D</button>
-        <button class="tog cyn" onclick="multiPick(this,'sk_bull_tf','2D')">2D</button>
-        <button class="tog cyn" onclick="multiPick(this,'sk_bull_tf','3D')">3D</button>
-        <button class="tog cyn" onclick="multiPick(this,'sk_bull_tf','4D')">4D</button>
-        <button class="tog cyn" onclick="multiPick(this,'sk_bull_tf','W')">W</button>
-        <button class="tog cyn" onclick="multiPick(this,'sk_bull_tf','M')">M</button>
-      </div>
-      <div class="field-label" style="margin-top:8px">Signal</div>
-      <div class="tog-row">
-        <button class="tog cyn" onclick="multiPick(this,'sk_bull_sig','4x8')">4×8</button>
-        <button class="tog cyn" onclick="multiPick(this,'sk_bull_sig','9x20')">9×20</button>
-        <button class="tog cyn" onclick="multiPick(this,'sk_bull_sig','MACD')">MACD</button>
-      </div>
-
-      <div style="height:1px; background:var(--border); margin:14px 0;"></div>
-
-      <div class="field-label" style="color:var(--magenta)">🟪 BEARISH SKITTLES (select all that apply)</div>
-      <div class="field-label" style="margin-top:6px">Timeframe</div>
-      <div class="tog-row">
-        <button class="tog mag" onclick="multiPick(this,'sk_bear_tf','2H')">2H</button>
-        <button class="tog mag" onclick="multiPick(this,'sk_bear_tf','4H')">4H</button>
-        <button class="tog mag" onclick="multiPick(this,'sk_bear_tf','1D')">1D</button>
-        <button class="tog mag" onclick="multiPick(this,'sk_bear_tf','2D')">2D</button>
-        <button class="tog mag" onclick="multiPick(this,'sk_bear_tf','3D')">3D</button>
-        <button class="tog mag" onclick="multiPick(this,'sk_bear_tf','4D')">4D</button>
-        <button class="tog mag" onclick="multiPick(this,'sk_bear_tf','W')">W</button>
-        <button class="tog mag" onclick="multiPick(this,'sk_bear_tf','M')">M</button>
-      </div>
-      <div class="field-label" style="margin-top:8px">Signal</div>
-      <div class="tog-row">
-        <button class="tog mag" onclick="multiPick(this,'sk_bear_sig','4x8')">4×8</button>
-        <button class="tog mag" onclick="multiPick(this,'sk_bear_sig','9x20')">9×20</button>
-        <button class="tog mag" onclick="multiPick(this,'sk_bear_sig','MACD')">MACD</button>
-      </div>
-
-      <div style="height:1px; background:var(--border); margin:14px 0;"></div>
-
-      <div class="field-label">Technical Confirmed?</div>
-      <div class="tog-row">
-        <button class="tog cyn" onclick="confirmTri(0,true,this)">✓ CONFIRMED</button>
-        <button class="tog mag" onclick="confirmTri(0,false,this)">✕ NOT YET</button>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="tri-item" id="tri1">
-    <div class="tri-header" onclick="toggleTri(1)">
-      <div class="tri-left">
-        <div class="tri-num">2</div>
-        <div>
-          <div class="tri-name">FLOW</div>
-          <div class="tri-sub">OI / Volume · 2× Opposite Side</div>
-        </div>
-      </div>
-      <div class="tri-check" id="triCheck1">—</div>
-    </div>
-    <div class="tri-body" id="triBody1">
-      <div class="field-label">Dominant Flow Direction</div>
-      <div class="tog-row">
-        <button class="tog call" onclick="pick(this,'f_dir','call')">CALL Flow Dominant</button>
-        <button class="tog put"  onclick="pick(this,'f_dir','put')">PUT Flow Dominant</button>
-      </div>
-      <div class="field-label" style="margin-top:10px">Call Volume / OI</div>
-      <input class="field" id="f_callvol" type="number" placeholder="e.g. 12000" oninput="checkFlowRatio()">
-      <div class="field-label">Put Volume / OI</div>
-      <input class="field" id="f_putvol" type="number" placeholder="e.g. 5000" oninput="checkFlowRatio()">
-      <div id="flowRatio" style="margin-top:8px; font-size:11px; color:var(--muted);"></div>
-      <div class="tog-row" style="margin-top:10px">
-        <button class="tog bull" onclick="confirmTri(1,true,this)">✓ CONFIRMED 2×+</button>
-        <button class="tog bear" onclick="confirmTri(1,false,this)">✕ NOT YET</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="tri-item" id="tri2">
-    <div class="tri-header" onclick="toggleTri(2)">
-      <div class="tri-left">
-        <div class="tri-num">3</div>
-        <div>
-          <div class="tri-name">FUNDAMENTAL</div>
-          <div class="tri-sub">Earnings · News · Events · Economics</div>
-        </div>
-      </div>
-      <div class="tri-check" id="triCheck2">—</div>
-    </div>
-    <div class="tri-body" id="triBody2">
-      <div class="field-label">Catalyst Type</div>
-      <div class="tog-row">
-        <button class="tog tf" onclick="multiPick(this,'cat','Earnings')">Earnings</button>
-        <button class="tog tf" onclick="multiPick(this,'cat','News')">News</button>
-        <button class="tog tf" onclick="multiPick(this,'cat','FDA')">FDA</button>
-        <button class="tog tf" onclick="multiPick(this,'cat','Macro')">Macro</button>
-        <button class="tog tf" onclick="multiPick(this,'cat','Sector')">Sector</button>
-      </div>
-      <div class="field-label" style="margin-top:10px">Catalyst Notes</div>
-      <textarea class="field" id="f_catalyst" rows="2" placeholder="Describe the catalyst..."></textarea>
-      <div class="tog-row" style="margin-top:10px">
-        <button class="tog bull" onclick="confirmTri(2,true,this)">✓ CONFIRMED</button>
-        <button class="tog bear" onclick="confirmTri(2,false,this)">✕ NOT YET</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="tri-score">
-    <div class="tri-dot" id="td0"></div>
-    <div class="tri-dot" id="td1"></div>
-    <div class="tri-dot" id="td2"></div>
-  </div>
-
-  <div class="verdict-banner" id="triVerdict">
-    <div class="verdict-title" id="triVT" style="color:var(--text)">AWAITING</div>
-    <div class="verdict-sub" id="triVS">Confirm all 3 legs to enter</div>
-  </div>
-
-<button class="btn btn-fire" onclick="saveTrifectaJournal()">🔥 Save to Journal</button>
-<button class="btn btn-ghost" onclick="resetTrifecta()">↺ Reset Trifecta</button>
-
-</div>
-
-<!-- ══════════ GAMEPLAN ══════════ -->
-
-<div class="page" id="gameplan">
-
-  <div style="margin-bottom:14px;">
-    <div class="field-label" style="margin-bottom:6px; font-size:10px; letter-spacing:2px;">MARKET CONDITIONS</div>
-    <div class="tog-row">
-      <button class="tog cyn" style="flex:1; padding:12px; font-size:13px; letter-spacing:2px;" onclick="pick(this,'riskmode','on')">⚡ RISK ON</button>
-      <button class="tog mag" style="flex:1; padding:12px; font-size:13px; letter-spacing:2px;" onclick="pick(this,'riskmode','off')">🛡 RISK OFF</button>
-    </div>
-    <div id="riskModeNote" style="display:none; margin-top:8px; font-size:10px; padding:8px 12px; border-radius:5px;"></div>
-  </div>
-
-  <div class="ticker-bar">
-    <input class="ticker-input" id="gp_ticker" placeholder="TICKER" maxlength="6"
-      oninput="this.value=this.value.toUpperCase(); syncFields('gp_ticker','tf_ticker',this.value); syncFields('gp_ticker','j_ticker',this.value); updateGameplan()"
-      style="font-size:14px; letter-spacing:2px; min-width:0; flex:1.2;">
-    <input class="price-input" id="gp_price" type="number" placeholder="$ Price"
-      oninput="syncFields('gp_price','tf_price',this.value); syncFields('gp_price','j_price',this.value); updateGameplan(); calcExpected()"
-      style="width:88px;">
-    <input class="price-input" id="gp_target" type="number" placeholder="🎯 PT"
-      oninput="syncFields('gp_target','j_target_price',this.value); updateGameplan()"
-      style="width:82px;">
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span class="step-pill">01</span> TREND</div>
-    <div class="tog-row">
-      <button class="tog bull" onclick="pick(this,'trend','bull')">▲ BULLISH</button>
-      <button class="tog bear" onclick="pick(this,'trend','bear')">▼ BEARISH</button>
-    </div>
-    <div class="field-label" style="margin-top:10px">50% Fib Level</div>
-    <div class="tog-row">
-      <button class="tog bull" onclick="pick(this,'fib50','above')">▲ Above 50% Fib</button>
-      <button class="tog bear" onclick="pick(this,'fib50','below')">▼ Below 50% Fib</button>
-    </div>
-    <div class="field-label" style="margin-top:10px">Ichimoku</div>
-    <div class="tog-row">
-      <button class="tog bull" onclick="pick(this,'ichimoku','above')">▲ Over Ichimoku</button>
-      <button class="tog bear" onclick="pick(this,'ichimoku','below')">▼ Under Ichimoku</button>
-    </div>
-    <div class="field-label" style="margin-top:10px">Prev Day High / Low</div>
-    <div class="tog-row">
-      <button class="tog bull" onclick="pick(this,'pdhl','abovehigh')">▲ Above PDH</button>
-      <button class="tog bear" onclick="pick(this,'pdhl','belowlow')">▼ Below PDL</button>
-      <button class="tog tf"   onclick="pick(this,'pdhl','between')">↔ Between</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span class="step-pill">02</span> PRICE ACTION</div>
-    <div class="tog-row">
-      <button class="tog exp" onclick="pick(this,'action','expansion')">↔ EXPANSION</button>
-      <button class="tog" style="border-color:#cc8800;color:#cc8800;" id="sqzInBtn" onclick="pickSqz(this,'squeeze')">⚡ IN A SQUEEZE</button>
-      <button class="tog" style="border-color:#00a855;color:#00a855;" id="sqzOutBtn" onclick="pickSqz(this,'fired')">🚀 FIRED OUT</button>
-    </div>
-    <div class="field-label">Timeframes</div>
-    <div class="tog-row" style="margin-top:6px">
-      <button class="tog tf" onclick="multiPick(this,'tf','5m')">5m</button>
-      <button class="tog tf" onclick="multiPick(this,'tf','15m')">15m</button>
-      <button class="tog tf" onclick="multiPick(this,'tf','30m')">30m</button>
-      <button class="tog tf" onclick="multiPick(this,'tf','1H')">1H</button>
-      <button class="tog tf" onclick="multiPick(this,'tf','2H')">2H</button>
-      <button class="tog tf" onclick="multiPick(this,'tf','4H')">4H</button>
-      <button class="tog tf" onclick="multiPick(this,'tf','D')">Daily</button>
-      <button class="tog tf" onclick="multiPick(this,'tf','W')">Weekly</button>
-      <button class="tog tf" onclick="multiPick(this,'tf','M')">Monthly</button>
-    </div>
-    <div id="sqzMeterWrap" style="display:none; margin-top:10px;">
-      <div class="sqz-label" id="sqzLabel">🔥 SQUEEZE INTENSITY</div>
-      <div class="sqz-meter"><div class="sqz-fill" id="sqzFill"></div></div>
-    </div>
-    <div class="field-label" style="margin-top:10px">ADX Direction</div>
-    <div class="tog-row">
-      <button class="tog bull" onclick="pick(this,'adx','bull')">▲ ADX Bullish (+DI > -DI)</button>
-      <button class="tog bear" onclick="pick(this,'adx','bear')">▼ ADX Bearish (-DI > +DI)</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span class="step-pill">03</span> PRICE RANGE · EXPECTED MOVE</div>
-    <div class="field-label">Expected Move ± $</div>
-    <input class="field" id="gp_em" type="number" placeholder="e.g. 3.50"
-      oninput="updateGameplan(); calcExpected()">
-    <div id="expectedCalc" style="display:none; margin-top:8px; font-size:11px; color:var(--muted);"></div>
-    <div class="field-label" style="margin-top:12px">Contract Details</div>
-    <input class="field" id="gp_contract" placeholder="e.g. AAPL 210C 05/16 × 5" oninput="syncFields('gp_contract','j_contract',this.value); updateGameplan()">
-    <div class="field-label" style="margin-top:10px">Contract Delta</div>
-    <div class="tog-row">
-      <button class="tog bull" onclick="pick(this,'delta','yes')">✓ Within .20 Delta</button>
-      <button class="tog bear" onclick="pick(this,'delta','no')">✕ Outside .20 Delta</button>
-    </div>
-    <div class="field-label" style="margin-top:12px">ROI Calculator <span style="color:var(--muted);font-size:9px;">(option premium prices)</span></div>
-    <div class="roi-row">
-      <input class="field" id="gp_entry_p" type="number" placeholder="Entry $" style="margin-top:0" oninput="syncFields('gp_entry_p','j_entry_price',this.value); calcROI()">
-      <span style="color:var(--muted)">→</span>
-      <input class="field" id="gp_target_p" type="number" placeholder="Target $" style="margin-top:0" oninput="calcROI()">
-      <div class="roi-result" id="roiResult">—</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span class="step-pill">04</span> LEVELS · BUYERS / SELLERS</div>
-    <div class="field-label">🟢 Over — Buyer Levels</div>
-    <input class="field" id="gp_over" placeholder="e.g. 580 → 584 → 590" oninput="updateGameplan()">
-    <div class="field-label">🔴 Under — Seller Levels</div>
-    <input class="field" id="gp_under" placeholder="e.g. 578 → 574 → 568" oninput="updateGameplan()">
-    <div class="field-label" style="margin-top:10px">OI Confirmation</div>
-    <div class="tog-row">
-      <button class="tog bull" onclick="pick(this,'oi_confirm','yes')">✓ OI 2× Opposing Side</button>
-      <button class="tog bear" onclick="pick(this,'oi_confirm','no')">✕ OI Not 2× Yet</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span class="step-pill">05</span> ENTRY SIGNALS</div>
-    <div class="field-label">Signal (select all that apply)</div>
-    <div class="tog-row">
-      <button class="tog bull" onclick="multiPick(this,'sig','9x21up')">9×21 Cross Up</button>
-      <button class="tog bear" onclick="multiPick(this,'sig','9x21dn')">9×21 Cross Down</button>
-    </div>
-    <div class="tog-row" style="margin-top:6px">
-      <button class="tog bull" onclick="multiPick(this,'sig','4x8up')">4×8 Cross Up</button>
-      <button class="tog bear" onclick="multiPick(this,'sig','4x8dn')">4×8 Cross Down</button>
-    </div>
-    <div class="tog-row" style="margin-top:6px">
-      <button class="tog bull" onclick="multiPick(this,'sig','macdxup')">MACD Cross Up</button>
-      <button class="tog bear" onclick="multiPick(this,'sig','macdxdn')">MACD Cross Down</button>
-    </div>
-    <div class="tog-row" style="margin-top:6px">
-      <button class="tog cyn"  onclick="multiPick(this,'sig','ichibnc')">Bounce off Ichi → Call</button>
-      <button class="tog mag"  onclick="multiPick(this,'sig','ichirjt')">Reject Ichi → Put</button>
-      <button class="tog tf"   onclick="multiPick(this,'sig','fib50b')">Bounce 50% Fib</button>
-      <button class="tog tf"   onclick="multiPick(this,'sig','fib618b')">Bounce 61.8% Fib</button>
-      <button class="tog mag"  onclick="multiPick(this,'sig','fib50r')">Reject 50% Fib</button>
-      <button class="tog mag"  onclick="multiPick(this,'sig','fib618r')">Reject 61.8% Fib</button>
-    </div>
-    <div class="field-label" style="margin-top:10px">RVOL</div>
-    <div class="tog-row">
-      <button class="tog rvol-call" id="rvolBtn" onclick="multiPick(this,'sig','rvol')">RVOL</button>
-    </div>
-    <div class="field-label" style="margin-top:10px">Direction</div>
-    <div class="tog-row">
-      <button class="tog call" onclick="pickEntry(this,'call')">▲ CALL</button>
-      <button class="tog put"  onclick="pickEntry(this,'put')">▼ PUT</button>
-    </div>
-  </div>
-
-  <div class="card" style="border-color:rgba(224,90,0,0.35); background:#f7f7fb;">
-    <div class="card-title" style="color:var(--orange)"><span class="step-pill">⚠</span> RISK RULES — READ BEFORE ENTERING</div>
-    <div style="display:flex;flex-direction:column;gap:12px;font-size:11px;line-height:1.7;color:#1a1a2e;">
-
-      <div style="border-left:3px solid var(--cyan); padding-left:10px;">
-        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--cyan);margin-bottom:3px">POSITION SIZE</div>
-        <span style="color:#1a1a2e;">Risk <strong style="color:var(--cyan)">5–10% of your account</strong> per trade. Never go all-in. Protect your capital first — no trade is worth blowing your account over.</span>
-      </div>
-
-      <div style="border-left:3px solid var(--magenta); padding-left:10px;">
-        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--magenta);margin-bottom:3px">STOP LOSS</div>
-        <span style="color:#1a1a2e;">If the contract loses <strong style="color:var(--magenta)">50% of the premium paid</strong>, exit the <strong style="color:var(--magenta)">full position immediately</strong>. No averaging down. No hoping. Cut it and move on to the next setup.</span>
-      </div>
-
-      <div style="border-left:3px solid var(--cyan); padding-left:10px;">
-        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--cyan);margin-bottom:3px">TAKE PROFIT</div>
-        <span style="color:#1a1a2e;">Target <strong style="color:var(--cyan)">100% gain</strong> on the contract. At 100%, sell half your position and let the remaining contracts ride as <strong style="color:var(--cyan)">free runners</strong> with zero risk.</span>
-      </div>
-
-      <div style="border-left:3px solid var(--orange); padding-left:10px;">
-        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--orange);margin-bottom:3px">DO NOT SELL EARLY 🔒</div>
-        <span style="color:#1a1a2e;"><strong style="color:var(--orange)">Hold until the stock hits your targeted price level.</strong> Selling early is the #1 account killer. Trust your levels, trust your gameplan. If your stop isn't hit and your target isn't reached — stay in the trade.</span>
-      </div>
-
-      <div style="border-left:3px solid var(--orange); padding-left:10px;">
-        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--orange);margin-bottom:3px">SQUEEZE PATIENCE ⏳</div>
-        <span style="color:#1a1a2e;">If in a higher timeframe squeeze, the breakout may not happen in the first half of the day. <strong style="color:var(--orange)">Be patient. Trust the setup.</strong> The 🔥 fire sale is your discount — wait for the market to catch up.</span>
-      </div>
-
-    </div>
-    <div class="field-label" style="margin-top:14px">Risk Rules Confirmed?</div>
-    <div class="tog-row">
-      <button class="tog cyn" onclick="pick(this,'risk','yes'); calcGrade()">✓ Acknowledged — Let's Trade</button>
-      <button class="tog mag" onclick="pick(this,'risk','no'); calcGrade()">✕ Not Ready</button>
-    </div>
-    <div id="gradeDisplay" style="display:none; margin-top:12px; padding:12px 14px; border-radius:8px; border:1px solid var(--border); display:flex; align-items:center; gap:12px;">
-      <div id="gradeLetter" style="font-family:'Orbitron',monospace; font-size:36px; font-weight:900; min-width:44px; text-align:center;">—</div>
-      <div>
-        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--muted);margin-bottom:3px;">TRADE GRADE</div>
-        <div id="gradeDesc" style="font-size:10px; color:var(--muted); line-height:1.5;"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="slabel">Generated Gameplan</div>
-  <div class="gameplan-out" id="gpOut">
-    <span style="color:var(--muted); font-size:11px;">Fill in fields above to generate your gameplan...</span>
-  </div>
-  <button class="copy-btn" onclick="copyGameplan()">⎘ Copy Gameplan</button>
-  <button class="btn btn-fire" onclick="saveToJournal()">🔥 Save to Journal</button>
-  <button class="btn btn-ghost" onclick="resetGameplan()">↺ Reset Gameplan</button>
 </div>
 
 <!-- ══════════ JOURNAL ══════════ -->
 
-<div class="page" id="journal">
+<div class="page active" id="journal">
 
   <!-- DYNAMIC STATS BAR -->
-  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:14px;">
-    <div class="card" style="padding:10px; text-align:center;">
-      <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;color:var(--muted)">TOTAL P&L</div>
-      <div style="font-family:'Orbitron',monospace;font-size:16px;font-weight:700;margin-top:4px" id="statPnl">—</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;">
+    <div style="background:var(--card);border-radius:10px;padding:10px 8px;text-align:center;border:1px solid var(--border);box-shadow:0 1px 4px rgba(0,0,0,0.04);">
+      <div style="font-family:'Orbitron',monospace;font-size:7px;letter-spacing:1px;color:var(--muted);">TOTAL P&L</div>
+      <div style="font-family:'Orbitron',monospace;font-size:15px;font-weight:700;margin-top:4px;" id="statPnl">—</div>
     </div>
-    <div class="card" style="padding:10px; text-align:center;">
-      <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;color:var(--muted)">WIN RATE</div>
-      <div style="font-family:'Orbitron',monospace;font-size:16px;font-weight:700;color:var(--cyan);margin-top:4px" id="statWR">—</div>
+    <div style="background:linear-gradient(135deg,rgba(0,119,204,0.08),rgba(204,0,170,0.06));border-radius:10px;padding:10px 8px;text-align:center;border:1px solid rgba(0,119,204,0.2);box-shadow:0 1px 4px rgba(0,0,0,0.04);">
+      <div style="font-family:'Orbitron',monospace;font-size:7px;letter-spacing:1px;color:var(--cyan);">WIN RATE</div>
+      <div style="font-family:'Orbitron',monospace;font-size:15px;font-weight:700;color:var(--cyan);margin-top:4px;" id="statWR">—</div>
     </div>
-    <div class="card" style="padding:10px; text-align:center;">
-      <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;color:var(--muted)">TRADES</div>
-      <div style="font-family:'Orbitron',monospace;font-size:16px;font-weight:700;color:var(--text);margin-top:4px" id="statTrades">—</div>
+    <div style="background:var(--card);border-radius:10px;padding:10px 8px;text-align:center;border:1px solid var(--border);box-shadow:0 1px 4px rgba(0,0,0,0.04);">
+      <div style="font-family:'Orbitron',monospace;font-size:7px;letter-spacing:1px;color:var(--muted);">TRADES</div>
+      <div style="font-family:'Orbitron',monospace;font-size:15px;font-weight:700;color:var(--text);margin-top:4px;" id="statTrades">—</div>
     </div>
   </div>
 
   <!-- ADD ENTRY FORM -->
   <div class="card" style="margin-bottom:14px;">
-    <div class="card-title">＋ LOG TRADE</div>
+    <div class="card-title">+ LOG TRADE</div>
 
-    <div class="ticker-bar" style="margin-bottom:0; flex-wrap:wrap; gap:6px;">
-      <input class="ticker-input" id="j_ticker" placeholder="TICKER" maxlength="6"
-        oninput="this.value=this.value.toUpperCase(); syncFields('j_ticker','gp_ticker',this.value); syncFields('j_ticker','tf_ticker',this.value)"
-        style="font-size:14px; letter-spacing:2px; min-width:0; flex:1;">
-      <input class="price-input" id="j_date" type="date" style="width:130px; color:var(--text); font-size:11px;">
+    <!-- MARKET CONDITIONS AT TOP -->
+    <div style="margin-bottom:10px;">
+      <div class="field-label" style="margin-bottom:6px;margin-top:0;">MARKET CONDITIONS</div>
+      <div class="tog-row">
+        <button class="tog cyn" style="flex:1;" onclick="pick(this,'riskmode','on'); liveCalcGrade()">&#9889; RISK ON</button>
+        <button class="tog mag" style="flex:1;" onclick="pick(this,'riskmode','off'); liveCalcGrade()">&#128737; RISK OFF</button>
+      </div>
+      <div id="riskModeNote" style="display:none;margin-top:8px;font-size:10px;padding:8px 12px;border-radius:5px;"></div>
     </div>
-    <input class="field" id="j_contract" placeholder="Contract  e.g. AAPL 210C 05/16 × 5" style="margin-top:8px;">
-    <!-- hidden sync fields kept for snapshot compatibility -->
+
+    <div style="height:1px;background:linear-gradient(90deg,rgba(0,119,204,0.3),rgba(204,0,170,0.2),transparent);margin-bottom:14px;"></div>
+
+    <!-- CONTRACT DETAILS -->
+    <div class="slabel" style="margin-top:0;">Contract Details</div>
+
+    <div class="cgrid2">
+      <div>
+        <div class="field-label" style="margin-top:0;">Ticker</div>
+        <input class="ticker-input" id="j_ticker" placeholder="TICKER" maxlength="6"
+          oninput="this.value=this.value.toUpperCase();"
+          style="font-size:14px;letter-spacing:2px;padding:9px 10px;">
+      </div>
+      <div>
+        <div class="field-label" style="margin-top:0;">Strike</div>
+        <input class="field" id="j_strike" type="number" placeholder="e.g. 210" style="margin-top:2px;">
+      </div>
+    </div>
+
+    <div class="cgrid2">
+      <div>
+        <div class="field-label" style="margin-top:0;">Call / Put</div>
+        <div class="tog-row" style="margin-top:4px;">
+          <button class="tog call" style="flex:1;" onclick="pickEntry(this,'call')">&#9650; CALL</button>
+          <button class="tog put"  style="flex:1;" onclick="pickEntry(this,'put')">&#9660; PUT</button>
+        </div>
+      </div>
+      <div>
+        <div class="field-label" style="margin-top:0;">Expiration</div>
+        <input class="field" id="j_expiration" type="date" style="margin-top:2px;color:var(--text);">
+      </div>
+    </div>
+
+    <div class="cgrid3">
+      <div>
+        <div class="field-label" style="margin-top:0;">Qty #</div>
+        <input class="field" id="j_quantity" type="number" placeholder="5" style="margin-top:2px;" oninput="calcJournalROI()">
+      </div>
+      <div>
+        <div class="field-label" style="margin-top:0;">Fill Price</div>
+        <input class="field" id="j_entry_price" type="number" placeholder="0.00" step="0.01" style="margin-top:2px;" oninput="calcJournalROI(); liveCalcGrade()">
+      </div>
+      <div>
+        <div class="field-label" style="margin-top:0;">Sell Price</div>
+        <input class="field" id="j_exit_price" type="number" placeholder="0.00" step="0.01" style="margin-top:2px;" oninput="calcJournalROI()">
+      </div>
+    </div>
+
+    <div class="cgrid2">
+      <div>
+        <div class="field-label" style="margin-top:0;">Date Opened</div>
+        <input class="field" id="j_date_opened" type="date" style="margin-top:2px;color:var(--text);">
+      </div>
+      <div>
+        <div class="field-label" style="margin-top:0;">Date Closed</div>
+        <input class="field" id="j_date" type="date" style="margin-top:2px;color:var(--text);">
+      </div>
+    </div>
+
+    <div class="cgrid2">
+      <div>
+        <div class="field-label" style="margin-top:0;">Stock Price $</div>
+        <input class="field" id="gp_price" type="number" placeholder="$ Price" style="margin-top:2px;" oninput="updateGameplan(); calcExpected()">
+      </div>
+      <div>
+        <div class="field-label" style="margin-top:0;">Price Target $</div>
+        <input class="field" id="gp_target" type="number" placeholder="PT" style="margin-top:2px;" oninput="updateGameplan()">
+      </div>
+    </div>
+
+    <div id="j_roi_display" style="display:none;margin-top:4px;padding:8px 12px;border-radius:5px;font-family:'Orbitron',monospace;font-size:13px;font-weight:700;text-align:center;"></div>
+    <input type="hidden" id="j_roi">
     <input type="hidden" id="j_price">
     <input type="hidden" id="j_target_price">
+    <input type="hidden" id="j_contract">
 
-    <div class="field-label" style="margin-top:12px">Outcome <span style="color:var(--orange);font-size:9px;">(optional — leave blank to save as OPEN)</span></div>
-    <div class="tog-row">
-      <button class="tog cyn" onclick="pick(this,'j_outcome','win')">✓ WIN</button>
-      <button class="tog mag" onclick="pick(this,'j_outcome','loss')">✕ LOSS</button>
-      <button class="tog tf"  onclick="pick(this,'j_outcome','be')">↔ B/E</button>
+    <div style="height:1px;background:linear-gradient(90deg,rgba(0,119,204,0.3),rgba(204,0,170,0.2),transparent);margin:14px 0;"></div>
+
+    <!-- RISK ACKNOWLEDGED -->
+    <div style="padding:12px;background:linear-gradient(135deg,rgba(0,119,204,0.06),rgba(204,0,170,0.04));border-radius:8px;border:1px solid rgba(0,119,204,0.2);">
+      <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--cyan);margin-bottom:8px;">&#9888; RISK RULES ACKNOWLEDGED?</div>
+      <div class="tog-row">
+        <button class="tog cyn" onclick="pick(this,'risk','yes'); liveCalcGrade()">&#10003; Acknowledged</button>
+        <button class="tog mag" onclick="pick(this,'risk','no'); liveCalcGrade()">&#10007; Not Ready</button>
+      </div>
     </div>
 
-    <div class="field-label" style="margin-top:10px">Option Entry & Exit Price <span style="color:var(--muted);font-size:9px;">(contract premium)</span></div>
-    <div class="roi-row" style="margin-top:4px;">
-      <input class="field" id="j_entry_price" type="number" placeholder="Entry $" step="0.01" style="margin-top:0" oninput="calcJournalROI()">
-      <span style="color:var(--muted)">→</span>
-      <input class="field" id="j_exit_price" type="number" placeholder="Exit $" step="0.01" style="margin-top:0" oninput="calcJournalROI()">
-      <div id="j_roi_display" style="font-family:'Orbitron',monospace;font-size:14px;font-weight:700;min-width:60px;text-align:right;color:var(--muted);">—</div>
-    </div>
-    <input type="hidden" id="j_roi">
+    <div style="height:1px;background:linear-gradient(90deg,rgba(0,119,204,0.3),rgba(204,0,170,0.2),transparent);margin:14px 0;"></div>
 
-    <div class="field-label" style="margin-top:10px">Did it Hit Price Target?</div>
-    <div class="tog-row">
-      <button class="tog cyn" onclick="pick(this,'j_hit_pt','yes')">✓ YES — Hit PT</button>
-      <button class="tog mag" onclick="pick(this,'j_hit_pt','no')">✕ NO — Missed PT</button>
+    <!-- TRIFECTA -->
+    <div class="slabel" style="margin-top:0;">&#9889; Trifecta</div>
+    <div class="belief-box" style="font-size:10px;padding:8px 12px;margin-bottom:10px;">
+      Technical + Flow + Fundamental = Green light to enter
     </div>
 
-    <div class="field-label" style="margin-top:10px">Was it a Squeeze?</div>
-    <div class="tog-row">
-      <button class="tog sqz" onclick="pick(this,'j_sqz','yes')">🔥 Yes — Squeeze</button>
-      <button class="tog tf"  onclick="pick(this,'j_sqz','no')">No Squeeze</button>
+    <div class="tri-item" id="tri0">
+      <div class="tri-header" onclick="toggleTri(0)">
+        <div class="tri-left"><div class="tri-num">1</div><div><div class="tri-name">TECHNICAL</div><div class="tri-sub">Skittles</div></div></div>
+        <div class="tri-check" id="triCheck0">—</div>
+      </div>
+      <div class="tri-body" id="triBody0">
+        <div class="field-label" style="color:var(--cyan)">&#129olean; BULLISH SKITTLES</div>
+        <div class="field-label" style="margin-top:6px">Timeframe</div>
+        <div class="tog-row">
+          <button class="tog cyn" onclick="multiPick(this,'sk_bull_tf','2H')">2H</button>
+          <button class="tog cyn" onclick="multiPick(this,'sk_bull_tf','4H')">4H</button>
+          <button class="tog cyn" onclick="multiPick(this,'sk_bull_tf','1D')">1D</button>
+          <button class="tog cyn" onclick="multiPick(this,'sk_bull_tf','2D')">2D</button>
+          <button class="tog cyn" onclick="multiPick(this,'sk_bull_tf','3D')">3D</button>
+          <button class="tog cyn" onclick="multiPick(this,'sk_bull_tf','4D')">4D</button>
+          <button class="tog cyn" onclick="multiPick(this,'sk_bull_tf','W')">W</button>
+          <button class="tog cyn" onclick="multiPick(this,'sk_bull_tf','M')">M</button>
+        </div>
+        <div class="field-label" style="margin-top:8px">Signal</div>
+        <div class="tog-row">
+          <button class="tog cyn" onclick="multiPick(this,'sk_bull_sig','4x8')">4x8</button>
+          <button class="tog cyn" onclick="multiPick(this,'sk_bull_sig','9x20')">9x20</button>
+          <button class="tog cyn" onclick="multiPick(this,'sk_bull_sig','MACD')">MACD</button>
+        </div>
+        <div style="height:1px;background:var(--border);margin:14px 0;"></div>
+        <div class="field-label" style="color:var(--magenta)">&#128999; BEARISH SKITTLES</div>
+        <div class="field-label" style="margin-top:6px">Timeframe</div>
+        <div class="tog-row">
+          <button class="tog mag" onclick="multiPick(this,'sk_bear_tf','2H')">2H</button>
+          <button class="tog mag" onclick="multiPick(this,'sk_bear_tf','4H')">4H</button>
+          <button class="tog mag" onclick="multiPick(this,'sk_bear_tf','1D')">1D</button>
+          <button class="tog mag" onclick="multiPick(this,'sk_bear_tf','2D')">2D</button>
+          <button class="tog mag" onclick="multiPick(this,'sk_bear_tf','3D')">3D</button>
+          <button class="tog mag" onclick="multiPick(this,'sk_bear_tf','4D')">4D</button>
+          <button class="tog mag" onclick="multiPick(this,'sk_bear_tf','W')">W</button>
+          <button class="tog mag" onclick="multiPick(this,'sk_bear_tf','M')">M</button>
+        </div>
+        <div class="field-label" style="margin-top:8px">Signal</div>
+        <div class="tog-row">
+          <button class="tog mag" onclick="multiPick(this,'sk_bear_sig','4x8')">4x8</button>
+          <button class="tog mag" onclick="multiPick(this,'sk_bear_sig','9x20')">9x20</button>
+          <button class="tog mag" onclick="multiPick(this,'sk_bear_sig','MACD')">MACD</button>
+        </div>
+        <div style="height:1px;background:var(--border);margin:14px 0;"></div>
+        <div class="field-label">Technical Confirmed?</div>
+        <div class="tog-row">
+          <button class="tog cyn" onclick="confirmTri(0,true,this); liveCalcGrade()">&#10003; CONFIRMED</button>
+          <button class="tog mag" onclick="confirmTri(0,false,this); liveCalcGrade()">&#10007; NOT YET</button>
+        </div>
+      </div>
     </div>
 
-    <div class="field-label" style="margin-top:10px">Gameplan Correct?</div>
-    <div class="tog-row">
-      <button class="tog bull" onclick="pick(this,'j_gp','yes')">✓ Correct</button>
-      <button class="tog bear" onclick="pick(this,'j_gp','no')">✕ Off</button>
-      <button class="tog tf"   onclick="pick(this,'j_gp','partial')">~ Partial</button>
+    <div class="tri-item" id="tri1">
+      <div class="tri-header" onclick="toggleTri(1)">
+        <div class="tri-left"><div class="tri-num">2</div><div><div class="tri-name">FLOW</div><div class="tri-sub">OI / Volume &middot; 2&times; Opposite Side</div></div></div>
+        <div class="tri-check" id="triCheck1">—</div>
+      </div>
+      <div class="tri-body" id="triBody1">
+        <div class="field-label">Dominant Flow Direction</div>
+        <div class="tog-row">
+          <button class="tog call" onclick="pick(this,'f_dir','call')">CALL Flow Dominant</button>
+          <button class="tog put"  onclick="pick(this,'f_dir','put')">PUT Flow Dominant</button>
+        </div>
+        <div class="field-label" style="margin-top:10px">Call Volume / OI</div>
+        <input class="field" id="f_callvol" type="number" placeholder="e.g. 12000" oninput="checkFlowRatio()">
+        <div class="field-label">Put Volume / OI</div>
+        <input class="field" id="f_putvol" type="number" placeholder="e.g. 5000" oninput="checkFlowRatio()">
+        <div id="flowRatio" style="margin-top:8px;font-size:11px;color:var(--muted);"></div>
+        <div class="tog-row" style="margin-top:10px">
+          <button class="tog bull" onclick="confirmTri(1,true,this); liveCalcGrade()">&#10003; CONFIRMED 2x+</button>
+          <button class="tog bear" onclick="confirmTri(1,false,this); liveCalcGrade()">&#10007; NOT YET</button>
+        </div>
+      </div>
     </div>
 
-    <div class="field-label" style="margin-top:10px">Followed the Plan?</div>
+    <div class="tri-item" id="tri2">
+      <div class="tri-header" onclick="toggleTri(2)">
+        <div class="tri-left"><div class="tri-num">3</div><div><div class="tri-name">FUNDAMENTAL</div><div class="tri-sub">Earnings &middot; News &middot; Events &middot; Economics</div></div></div>
+        <div class="tri-check" id="triCheck2">—</div>
+      </div>
+      <div class="tri-body" id="triBody2">
+        <div class="field-label">Catalyst Type</div>
+        <div class="tog-row">
+          <button class="tog tf" onclick="multiPick(this,'cat','Earnings')">Earnings</button>
+          <button class="tog tf" onclick="multiPick(this,'cat','News')">News</button>
+          <button class="tog tf" onclick="multiPick(this,'cat','FDA')">FDA</button>
+          <button class="tog tf" onclick="multiPick(this,'cat','Macro')">Macro</button>
+          <button class="tog tf" onclick="multiPick(this,'cat','Sector')">Sector</button>
+        </div>
+        <div class="field-label" style="margin-top:10px">Catalyst Notes</div>
+        <textarea class="field" id="f_catalyst" rows="2" placeholder="Describe the catalyst..."></textarea>
+        <div class="tog-row" style="margin-top:10px">
+          <button class="tog bull" onclick="confirmTri(2,true,this); liveCalcGrade()">&#10003; CONFIRMED</button>
+          <button class="tog bear" onclick="confirmTri(2,false,this); liveCalcGrade()">&#10007; NOT YET</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tri-score" style="margin-top:12px;">
+      <div class="tri-dot" id="td0"></div>
+      <div class="tri-dot" id="td1"></div>
+      <div class="tri-dot" id="td2"></div>
+    </div>
+    <div class="verdict-banner" id="triVerdict" style="margin-top:10px;">
+      <div class="verdict-title" id="triVT" style="color:var(--text)">AWAITING</div>
+      <div class="verdict-sub" id="triVS">Confirm all 3 legs to enter</div>
+    </div>
+
+    <div style="height:1px;background:var(--border);margin:14px 0;"></div>
+
+    <!-- GAMEPLAN -->
+    <div class="slabel" style="margin-top:0;">&#128203; Gameplan</div>
+
+    <div class="card" style="margin-bottom:10px;">
+      <div class="card-title"><span class="step-pill">01</span> TREND</div>
+      <div class="tog-row">
+        <button class="tog bull" onclick="pick(this,'trend','bull'); liveCalcGrade()">&#9650; BULLISH</button>
+        <button class="tog bear" onclick="pick(this,'trend','bear'); liveCalcGrade()">&#9660; BEARISH</button>
+      </div>
+      <div class="field-label" style="margin-top:10px">50% Fib Level</div>
+      <div class="tog-row">
+        <button class="tog bull" onclick="pick(this,'fib50','above'); liveCalcGrade()">&#9650; Above 50% Fib</button>
+        <button class="tog bear" onclick="pick(this,'fib50','below'); liveCalcGrade()">&#9660; Below 50% Fib</button>
+      </div>
+      <div class="field-label" style="margin-top:10px">Ichimoku</div>
+      <div class="tog-row">
+        <button class="tog bull" onclick="pick(this,'ichimoku','above'); liveCalcGrade()">&#9650; Over Ichimoku</button>
+        <button class="tog bear" onclick="pick(this,'ichimoku','below'); liveCalcGrade()">&#9660; Under Ichimoku</button>
+      </div>
+      <div class="field-label" style="margin-top:10px">Prev Day High / Low</div>
+      <div class="tog-row">
+        <button class="tog bull" onclick="pick(this,'pdhl','abovehigh'); liveCalcGrade()">&#9650; Above PDH</button>
+        <button class="tog bear" onclick="pick(this,'pdhl','belowlow'); liveCalcGrade()">&#9660; Below PDL</button>
+        <button class="tog tf"   onclick="pick(this,'pdhl','between'); liveCalcGrade()">&#8596; Between</button>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:10px;">
+      <div class="card-title"><span class="step-pill">02</span> PRICE ACTION</div>
+      <div class="tog-row">
+        <button class="tog exp" onclick="pick(this,'action','expansion'); liveCalcGrade()">&#8596; EXPANSION</button>
+        <button class="tog" style="border-color:#cc8800;color:#cc8800;" id="sqzInBtn" onclick="pickSqz(this,'squeeze')">&#9889; IN A SQUEEZE</button>
+        <button class="tog" style="border-color:#00a855;color:#00a855;" id="sqzOutBtn" onclick="pickSqz(this,'fired')">&#128640; FIRED OUT</button>
+      </div>
+      <div class="field-label">Timeframes</div>
+      <div class="tog-row" style="margin-top:6px">
+        <button class="tog tf" onclick="multiPick(this,'tf','5m')">5m</button>
+        <button class="tog tf" onclick="multiPick(this,'tf','15m')">15m</button>
+        <button class="tog tf" onclick="multiPick(this,'tf','30m')">30m</button>
+        <button class="tog tf" onclick="multiPick(this,'tf','1H')">1H</button>
+        <button class="tog tf" onclick="multiPick(this,'tf','2H')">2H</button>
+        <button class="tog tf" onclick="multiPick(this,'tf','4H')">4H</button>
+        <button class="tog tf" onclick="multiPick(this,'tf','D')">Daily</button>
+        <button class="tog tf" onclick="multiPick(this,'tf','W')">Weekly</button>
+        <button class="tog tf" onclick="multiPick(this,'tf','M')">Monthly</button>
+      </div>
+      <div id="sqzMeterWrap" style="display:none;margin-top:10px;">
+        <div class="sqz-label" id="sqzLabel">&#9889; SQUEEZE INTENSITY</div>
+        <div class="sqz-meter"><div class="sqz-fill" id="sqzFill"></div></div>
+      </div>
+      <div class="field-label" style="margin-top:10px">ADX Direction</div>
+      <div class="tog-row">
+        <button class="tog bull" onclick="pick(this,'adx','bull'); liveCalcGrade()">&#9650; ADX Bullish (+DI &gt; -DI)</button>
+        <button class="tog bear" onclick="pick(this,'adx','bear'); liveCalcGrade()">&#9660; ADX Bearish (-DI &gt; +DI)</button>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:10px;">
+      <div class="card-title"><span class="step-pill">03</span> PRICE RANGE &middot; EXPECTED MOVE</div>
+      <div class="field-label">Expected Move &plusmn; $</div>
+      <input class="field" id="gp_em" type="number" placeholder="e.g. 3.50" oninput="updateGameplan(); calcExpected()">
+      <div id="expectedCalc" style="display:none;margin-top:8px;font-size:11px;color:var(--muted);"></div>
+      <div class="field-label" style="margin-top:10px">Contract Delta</div>
+      <div class="tog-row">
+        <button class="tog bull" onclick="pick(this,'delta','yes'); liveCalcGrade()">&#10003; Within .20 Delta</button>
+        <button class="tog bear" onclick="pick(this,'delta','no'); liveCalcGrade()">&#10007; Outside .20 Delta</button>
+      </div>
+      <div class="field-label" style="margin-top:12px">ROI Calculator <span style="color:var(--muted);font-size:9px;">(option premium)</span></div>
+      <div class="roi-row">
+        <input class="field" id="gp_entry_p" type="number" placeholder="Entry $" style="margin-top:0" oninput="calcROI()">
+        <span style="color:var(--muted)">&#8594;</span>
+        <input class="field" id="gp_target_p" type="number" placeholder="Target $" style="margin-top:0" oninput="calcROI()">
+        <div class="roi-result" id="roiResult">—</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:10px;">
+      <div class="card-title"><span class="step-pill">04</span> LEVELS &middot; BUYERS / SELLERS</div>
+      <div class="field-label">&#129001; Over — Buyer Levels</div>
+      <input class="field" id="gp_over" placeholder="e.g. 580 to 584 to 590" oninput="updateGameplan()">
+      <div class="field-label">&#128997; Under — Seller Levels</div>
+      <input class="field" id="gp_under" placeholder="e.g. 578 to 574 to 568" oninput="updateGameplan()">
+      <div class="field-label" style="margin-top:10px">OI Confirmation</div>
+      <div class="tog-row">
+        <button class="tog bull" onclick="pick(this,'oi_confirm','yes'); liveCalcGrade()">&#10003; OI 2x Opposing Side</button>
+        <button class="tog bear" onclick="pick(this,'oi_confirm','no'); liveCalcGrade()">&#10007; OI Not 2x Yet</button>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:10px;">
+      <div class="card-title"><span class="step-pill">05</span> ENTRY SIGNALS</div>
+      <div class="field-label">Signal (select all that apply)</div>
+      <div class="tog-row">
+        <button class="tog bull" onclick="multiPick(this,'sig','9x21up'); liveCalcGrade()">9x21 Cross Up</button>
+        <button class="tog bear" onclick="multiPick(this,'sig','9x21dn'); liveCalcGrade()">9x21 Cross Down</button>
+      </div>
+      <div class="tog-row" style="margin-top:6px">
+        <button class="tog bull" onclick="multiPick(this,'sig','4x8up'); liveCalcGrade()">4x8 Cross Up</button>
+        <button class="tog bear" onclick="multiPick(this,'sig','4x8dn'); liveCalcGrade()">4x8 Cross Down</button>
+      </div>
+      <div class="tog-row" style="margin-top:6px">
+        <button class="tog bull" onclick="multiPick(this,'sig','macdxup'); liveCalcGrade()">MACD Cross Up</button>
+        <button class="tog bear" onclick="multiPick(this,'sig','macdxdn'); liveCalcGrade()">MACD Cross Down</button>
+      </div>
+      <div class="tog-row" style="margin-top:6px">
+        <button class="tog cyn"  onclick="multiPick(this,'sig','ichibnc'); liveCalcGrade()">Bounce off Ichi - Call</button>
+        <button class="tog mag"  onclick="multiPick(this,'sig','ichirjt'); liveCalcGrade()">Reject Ichi - Put</button>
+        <button class="tog tf"   onclick="multiPick(this,'sig','fib50b'); liveCalcGrade()">Bounce 50% Fib</button>
+        <button class="tog tf"   onclick="multiPick(this,'sig','fib618b'); liveCalcGrade()">Bounce 61.8% Fib</button>
+        <button class="tog mag"  onclick="multiPick(this,'sig','fib50r'); liveCalcGrade()">Reject 50% Fib</button>
+        <button class="tog mag"  onclick="multiPick(this,'sig','fib618r'); liveCalcGrade()">Reject 61.8% Fib</button>
+      </div>
+      <div class="field-label" style="margin-top:10px">RVOL</div>
+      <div class="tog-row">
+        <button class="tog rvol-call" id="rvolBtn" onclick="multiPick(this,'sig','rvol'); liveCalcGrade()">RVOL</button>
+      </div>
+    </div>
+
+    <div class="field-label" style="margin-top:4px;">Did it Hit Price Target?</div>
     <div class="tog-row">
-      <button class="tog bull" onclick="pick(this,'j_follow','yes')">✓ Followed</button>
-      <button class="tog bear" onclick="pick(this,'j_follow','no')">✕ Deviated</button>
-      <button class="tog tf"   onclick="pick(this,'j_follow','partial')">~ Partially</button>
+      <button class="tog cyn" onclick="pick(this,'j_hit_pt','yes'); liveCalcGrade()">&#10003; YES — Hit PT</button>
+      <button class="tog mag" onclick="pick(this,'j_hit_pt','no'); liveCalcGrade()">&#10007; NO — Missed PT</button>
+    </div>
+
+    <div class="field-label" style="margin-top:10px;">Followed the Plan?</div>
+    <div class="tog-row">
+      <button class="tog bull" onclick="pick(this,'j_follow','yes'); liveCalcGrade()">&#10003; Followed</button>
+      <button class="tog bear" onclick="pick(this,'j_follow','no'); liveCalcGrade()">&#10007; Deviated</button>
+      <button class="tog tf"   onclick="pick(this,'j_follow','partial'); liveCalcGrade()">~ Partially</button>
+    </div>
+
+    <div class="field-label" style="margin-top:10px">Outcome <span style="color:var(--muted);font-size:9px;">(leave blank = OPEN)</span></div>
+    <div class="tog-row">
+      <button class="tog cyn" onclick="pick(this,'j_outcome','win'); liveCalcGrade()">&#10003; WIN</button>
+      <button class="tog mag" onclick="pick(this,'j_outcome','loss'); liveCalcGrade()">&#10007; LOSS</button>
+      <button class="tog tf"  onclick="pick(this,'j_outcome','be'); liveCalcGrade()">&#8596; B/E</button>
     </div>
 
     <div class="field-label" style="margin-top:10px">Notes</div>
     <textarea class="field" id="j_notes" rows="2" placeholder="What happened? Lessons learned..."></textarea>
 
-    <div style="font-size:9px; color:var(--cyan); letter-spacing:1px; margin-top:12px; padding:8px 10px; background:rgba(0,119,204,0.06); border:1px solid rgba(0,119,204,0.2); border-radius:5px;">
-      ⚡ Current Gameplan + Trifecta data will be attached automatically
+    <!-- LIVE GRADE -->
+    <div id="gradeDisplay" style="display:none;margin-top:12px;padding:12px 14px;border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;gap:12px;">
+      <div id="gradeLetter" style="font-family:'Orbitron',monospace;font-size:36px;font-weight:900;min-width:44px;text-align:center;">—</div>
+      <div>
+        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--muted);margin-bottom:3px;">TRADE GRADE</div>
+        <div id="gradeDesc" style="font-size:10px;color:var(--muted);line-height:1.5;"></div>
+      </div>
     </div>
 
-    <button class="btn btn-fire" onclick="addJournalEntry()" style="margin-top:10px;">🔥 Add to Journal</button>
+    <button class="btn btn-fire" onclick="addJournalEntry()" style="margin-top:14px;">&#128293; Add to Journal</button>
+    <button class="btn btn-ghost" onclick="resetJournalForm()">&#8635; Reset Form</button>
   </div>
 
   <!-- FILTER BAR -->
-  <div style="display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap;">
+  <div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;">
     <button class="tog tf on" onclick="filterJournal('all',this)">ALL</button>
     <button class="tog cyn" onclick="filterJournal('win',this)">WINS</button>
     <button class="tog mag" onclick="filterJournal('loss',this)">LOSSES</button>
-    <button class="tog" style="border-color:rgba(0,200,255,0.4);color:#00aadd;" onclick="filterJournal('open',this)">● OPEN</button>
+    <button class="tog" style="border-color:rgba(0,200,255,0.4);color:#00aadd;" onclick="filterJournal('open',this)">&#9679; OPEN</button>
     <input id="f_ticker" class="field" placeholder="Filter ticker..." style="width:110px;margin-top:0;padding:6px 10px;font-size:11px;" oninput="filterByTicker(this.value)">
   </div>
 
-  <div style="display:flex; gap:6px; margin-bottom:12px;">
-    <button onclick="exportJournal()" style="flex:1;padding:10px;border-radius:5px;border:1px solid rgba(0,119,204,0.3);background:rgba(0,119,204,0.06);color:var(--cyan);font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;cursor:pointer;">⬇ EXPORT TRADES</button>
+  <div style="display:flex;gap:6px;margin-bottom:12px;">
+    <button onclick="exportJournal()" style="flex:1;padding:10px;border-radius:5px;border:1px solid rgba(0,119,204,0.3);background:rgba(0,119,204,0.06);color:var(--cyan);font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;cursor:pointer;">&#11015; EXPORT TRADES</button>
     <label style="flex:1;padding:10px;border-radius:5px;border:1px solid rgba(0,168,85,0.3);background:rgba(0,168,85,0.06);color:var(--green);font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;cursor:pointer;text-align:center;">
-      ⬆ IMPORT TRADES
+      &#11014; IMPORT TRADES
       <input type="file" accept=".json" onchange="importJournal(event)" style="display:none;">
     </label>
   </div>
@@ -804,27 +736,53 @@ body {
   <div id="journalList"></div>
 </div>
 
-<!-- ══════════ BELIEF ══════════ -->
+<!-- BELIEF TAB -->
 
 <div class="page" id="belief">
 
-  <div class="belief-box" style="font-size:12px; line-height:1.9;">
-    <div class="belief-title">🔥 THE SQUEEZE BELIEF SYSTEM</div>
+  <div class="belief-box" style="font-size:12px;line-height:1.9;">
+    <div class="belief-title">&#128293; THE SQUEEZE BELIEF SYSTEM</div>
     As naked option traders we want volatility — dynamic price action so our premiums can move quickly.<br><br>
     When there's a squeeze, Market Makers are in a state of flux trying to price contracts appropriately.
     We can take advantage — buying during a squeeze at a
     <strong style="color:var(--orange)">discounted price</strong> and waiting for the breakout direction
     to see profits soar as Market Makers inflate price in the direction of demand.<br><br>
-    <strong style="color:var(--yellow)">🔥 Think of a squeeze as a limited-time clearance sale.</strong><br><br>
+    <strong style="color:var(--yellow)">&#128293; Think of a squeeze as a limited-time clearance sale.</strong><br><br>
     You buy at a discount. You sell at a premium. Bigger squeeze = bigger potential ROI.
     That's why squeezes = opportunity.<br><br>
-    <strong style="color:var(--cyan)">📊 90% of the time, we WILL hit our expected move.</strong> Trust the math, trust the system.<br><br>
-    <strong style="color:var(--orange)">⏳ If we are in a higher timeframe squeeze, we may not break out in the first half of the day — be patient and trust the gameplan.</strong> The setup is still valid. Don't panic out early.
+    <strong style="color:var(--cyan)">&#128202; 90% of the time, we WILL hit our expected move.</strong> Trust the math, trust the system.<br><br>
+    <strong style="color:var(--orange)">&#9203; If we are in a higher timeframe squeeze, we may not break out in the first half of the day — be patient and trust the gameplan.</strong> The setup is still valid. Don't panic out early.
+  </div>
+
+  <div class="slabel">Risk Rules</div>
+  <div class="card" style="border-color:rgba(224,90,0,0.2);background:#f7f7fb;">
+    <div style="display:flex;flex-direction:column;gap:12px;font-size:11px;line-height:1.7;color:#1a1a2e;">
+      <div style="border-left:3px solid var(--cyan);padding-left:10px;">
+        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--cyan);margin-bottom:3px">POSITION SIZE</div>
+        Risk <strong style="color:var(--cyan)">5-10% of your account</strong> per trade. Never go all-in. Protect your capital first.
+      </div>
+      <div style="border-left:3px solid var(--magenta);padding-left:10px;">
+        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--magenta);margin-bottom:3px">STOP LOSS</div>
+        If the contract loses <strong style="color:var(--magenta)">50% of the premium paid</strong>, exit the full position immediately. No averaging down.
+      </div>
+      <div style="border-left:3px solid var(--cyan);padding-left:10px;">
+        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--cyan);margin-bottom:3px">TAKE PROFIT</div>
+        Target <strong style="color:var(--cyan)">100% gain</strong> on the contract. At 100%, sell half and let the rest ride as <strong style="color:var(--cyan)">free runners</strong>.
+      </div>
+      <div style="border-left:3px solid var(--orange);padding-left:10px;">
+        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--orange);margin-bottom:3px">DO NOT SELL EARLY &#128274;</div>
+        <strong style="color:var(--orange)">Hold until the stock hits your targeted price level.</strong> Selling early is the #1 account killer. Trust your levels.
+      </div>
+      <div style="border-left:3px solid var(--orange);padding-left:10px;">
+        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--orange);margin-bottom:3px">SQUEEZE PATIENCE &#9203;</div>
+        Higher timeframe squeezes may not break out in the first half of the day. <strong style="color:var(--orange)">Be patient. Trust the setup.</strong>
+      </div>
+    </div>
   </div>
 
   <div class="slabel">Process Priority</div>
   <div class="card">
-    <div style="display:flex; flex-direction:column; gap:0;">
+    <div style="display:flex;flex-direction:column;gap:0;">
       <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)">
         <div style="font-family:'Orbitron',monospace;font-size:18px;font-weight:900;color:var(--cyan);min-width:24px">1</div>
         <div><div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px">TREND</div><div style="font-size:10px;color:var(--muted);margin-top:2px">Bullish / Bearish</div></div>
@@ -843,7 +801,7 @@ body {
       </div>
       <div style="display:flex;align-items:center;gap:12px;padding:10px 0;">
         <div style="font-family:'Orbitron',monospace;font-size:18px;font-weight:900;color:var(--green);min-width:24px">5</div>
-        <div><div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px">ENTRY</div><div style="font-size:10px;color:var(--muted);margin-top:2px">9×20 EMA + MACD Confirmation</div></div>
+        <div><div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px">ENTRY</div><div style="font-size:10px;color:var(--muted);margin-top:2px">9x20 EMA + MACD Confirmation</div></div>
       </div>
     </div>
   </div>
@@ -852,21 +810,22 @@ body {
   <div class="card">
     <div style="display:flex;flex-direction:column;gap:14px;">
       <div style="border-left:3px solid var(--cyan);padding-left:12px;">
-        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--cyan);margin-bottom:4px">1 · TECHNICAL — SKITTLES</div>
-        <div style="font-size:11px">Bullish: <span style="color:var(--muted)">Cyan TFs + 4×8, 9×20, or MACD</span></div>
-        <div style="font-size:11px">Bearish: <span style="color:var(--muted)">Magenta TFs + 4×8, 9×20, or MACD</span></div>
+        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--cyan);margin-bottom:4px">1 &middot; TECHNICAL — SKITTLES</div>
+        <div style="font-size:11px">Bullish: <span style="color:var(--muted)">Cyan TFs + 4x8, 9x20, or MACD</span></div>
+        <div style="font-size:11px">Bearish: <span style="color:var(--muted)">Magenta TFs + 4x8, 9x20, or MACD</span></div>
       </div>
       <div style="border-left:3px solid var(--green);padding-left:12px;">
-        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--green);margin-bottom:4px">2 · FLOW CALL/PUT</div>
-        <div style="font-size:11px">Higher OI/Volume <span style="color:var(--muted)">(2× the opposite side)</span></div>
+        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--green);margin-bottom:4px">2 &middot; FLOW CALL/PUT</div>
+        <div style="font-size:11px">Higher OI/Volume <span style="color:var(--muted)">(2x the opposite side)</span></div>
       </div>
       <div style="border-left:3px solid var(--orange);padding-left:12px;">
-        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--orange);margin-bottom:4px">3 · FUNDAMENTAL</div>
+        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--orange);margin-bottom:4px">3 &middot; FUNDAMENTAL</div>
         <div style="font-size:11px">Company/Sector Catalyst <span style="color:var(--muted)">(Earnings, News, Events, Economics)</span></div>
       </div>
     </div>
   </div>
 </div>
+
 
 <script>
 const S = {
@@ -886,8 +845,7 @@ async function saveJournal() {
   try {
     await window.storage.set('journal', JSON.stringify(S.journal));
   } catch(e) {
-    // fallback to localStorage if storage API unavailable
-    try { saveJournal(); } catch(_) {}
+    try { localStorage.setItem('sqz_v2', JSON.stringify(S.journal)); } catch(_) {}
   }
 }
 
@@ -921,7 +879,6 @@ function showTab(id, el) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   el.classList.add('active');
-  if (id === 'journal') renderJournal();
 }
 
 function pick(el, key, val) {
@@ -1057,28 +1014,33 @@ function calcGrade() {
 function calcJournalROI() {
   const entry = parseFloat(document.getElementById('j_entry_price').value);
   const exit  = parseFloat(document.getElementById('j_exit_price').value);
+  const qty   = parseFloat(document.getElementById('j_quantity')?.value) || 1;
   const disp  = document.getElementById('j_roi_display');
   const hidden= document.getElementById('j_roi');
   if (!isNaN(entry) && !isNaN(exit) && entry > 0) {
-    const roi = ((exit - entry) / entry * 100).toFixed(1);
-    disp.textContent = (roi >= 0 ? '+' : '') + roi + '%';
-    disp.style.color = roi >= 0 ? 'var(--cyan)' : 'var(--magenta)';
+    const roi  = ((exit - entry) / entry * 100).toFixed(1);
+    const pnl  = ((exit - entry) * 100 * qty).toFixed(2);
+    const color = roi >= 0 ? 'var(--cyan)' : 'var(--magenta)';
+    const bg    = roi >= 0 ? 'rgba(0,119,204,0.08)' : 'rgba(204,0,170,0.06)';
+    disp.style.display = 'block';
+    disp.style.color = color;
+    disp.style.background = bg;
+    disp.style.border = '1px solid ' + color;
+    disp.innerHTML = (roi >= 0 ? '+' : '') + roi + '%  &nbsp;&nbsp;  P&L: ' + (pnl >= 0 ? '+$' : '-$') + Math.abs(pnl);
     hidden.value = roi;
   } else {
-    disp.textContent = '—';
-    disp.style.color = 'var(--muted)';
+    disp.style.display = 'none';
     hidden.value = '';
   }
 }
 
 function updateGameplan() {
-  const ticker   = document.getElementById('gp_ticker').value || '???';
-  const price    = document.getElementById('gp_price').value;
-  const target   = document.getElementById('gp_target').value;
-  const em       = document.getElementById('gp_em').value;
-  const over     = document.getElementById('gp_over').value;
-  const under    = document.getElementById('gp_under').value;
-  const contract = document.getElementById('gp_contract') ? document.getElementById('gp_contract').value : '';
+  const ticker   = document.getElementById('j_ticker')?.value || '???';
+  const price    = document.getElementById('gp_price')?.value;
+  const target   = document.getElementById('gp_target')?.value;
+  const em       = document.getElementById('gp_em')?.value;
+  const over     = document.getElementById('gp_over')?.value;
+  const under    = document.getElementById('gp_under')?.value;
   const tfs      = S.tf.length ? S.tf.join(', ') : '—';
 
   const sqzWrap = document.getElementById('sqzMeterWrap');
@@ -1099,80 +1061,14 @@ function updateGameplan() {
   } else { sqzWrap.style.display = 'none'; }
 
   const out = document.getElementById('gpOut');
-  if (!S.trend && !S.action && !S.entry) {
-    out.innerHTML = '<span style="color:var(--muted);font-size:11px;">Fill in fields above to generate your gameplan...</span>';
-    return;
+  if (out) {
+    if (!S.trend && !S.action && !S.entry) {
+      out.innerHTML = '<span style="color:var(--muted);font-size:11px;">Fill in fields above...</span>';
+      return;
+    }
+    // gpOut is hidden/removed in new layout — safe no-op
   }
-
-  const tC = S.trend === 'bull' ? 'bull' : S.trend === 'bear' ? 'bear' : '';
-  const tT = S.trend === 'bull' ? '▲ BULLISH' : S.trend === 'bear' ? '▼ BEARISH' : '—';
-  const fib50T = S.fib50 === 'above' ? '▲ Above 50% Fib' : S.fib50 === 'below' ? '▼ Below 50% Fib' : '—';
-  const fib50C = S.fib50 === 'above' ? 'bull' : S.fib50 === 'below' ? 'bear' : '';
-  const ichiT  = S.ichimoku === 'above' ? '▲ Over Ichimoku' : S.ichimoku === 'below' ? '▼ Under Ichimoku' : '—';
-  const ichiC  = S.ichimoku === 'above' ? 'bull' : S.ichimoku === 'below' ? 'bear' : '';
-  const pdhlT = S.pdhl === 'abovehigh' ? '▲ Above PDH' : S.pdhl === 'belowlow' ? '▼ Below PDL' : S.pdhl === 'between' ? '↔ Between PDH/PDL' : '—';
-  const pdhlC = S.pdhl === 'abovehigh' ? 'bull' : S.pdhl === 'belowlow' ? 'bear' : '';
-  const aC = S.action === 'squeeze' ? 'sqz' : S.action === 'expansion' ? 'exp' : S.action === 'fired' ? 'bull' : '';
-  const aT = S.action === 'squeeze' ? '⚡ IN A SQUEEZE (' + tfs + ')' :
-             S.action === 'fired'   ? '🚀 FIRED OUT OF SQUEEZE (' + tfs + ')' :
-             S.action === 'expansion' ? '↔ EXPANSION (' + tfs + ')' : '—';
-  const adxT = S.adx === 'bull' ? '▲ ADX Bullish (+DI > -DI)' : S.adx === 'bear' ? '▼ ADX Bearish (-DI > +DI)' : '—';
-  const adxC = S.adx === 'bull' ? 'bull' : S.adx === 'bear' ? 'bear' : '';
-  const emT = em && price
-    ? '+/- $' + em + '  →  ' + (parseFloat(price)-parseFloat(em)).toFixed(2) + ' / ' + (parseFloat(price)+parseFloat(em)).toFixed(2)
-    : em ? '+/- $' + em : '—';
-  const targetT = target ? '<span style="color:var(--green)">🎯 $' + parseFloat(target).toFixed(2) + '</span>' : '—';
-  const deltaT = S.delta === 'yes' ? '✓ Within .20 Delta' : S.delta === 'no' ? '✕ Outside .20 Delta' : '—';
-  const deltaC = S.delta === 'yes' ? 'bull' : S.delta === 'no' ? 'bear' : '';
-  const oiT = S.oi_confirm === 'yes' ? '✓ OI 2× Confirmed' : S.oi_confirm === 'no' ? '✕ OI Not 2× Yet' : '—';
-  const oiC = S.oi_confirm === 'yes' ? 'bull' : S.oi_confirm === 'no' ? 'bear' : '';
-  const sigLabels = {
-    '9x21up':'9×21 Cross Up','9x21dn':'9×21 Cross Down',
-    '4x8up':'4×8 Cross Up','4x8dn':'4×8 Cross Down',
-    'macdxup':'MACD Cross Up','macdxdn':'MACD Cross Down',
-    'ichibnc':'Bounce off Ichi → Call','ichirjt':'Reject Ichi → Put',
-    'fib50b':'Bounce 50% Fib','fib618b':'Bounce 61.8% Fib',
-    'fib50r':'Reject 50% Fib','fib618r':'Reject 61.8% Fib',
-    'rvol':'RVOL'
-  };
-  const sigT = S.sig.length ? S.sig.map(s => sigLabels[s]||s).join(' + ') : '—';
-  const eC = S.entry === 'call' ? 'call' : S.entry === 'put' ? 'put' : '';
-  const eT = S.entry === 'call' ? '▲ CALL' : S.entry === 'put' ? '▼ PUT' : '—';
-  const riskT = S.risk === 'yes' ? '✓ 5-10% size · 50% SL · 100% TP · Hold runners' : S.risk === 'no' ? '✕ Not confirmed' : '—';
-  const riskC = S.risk === 'yes' ? 'bull' : S.risk === 'no' ? 'bear' : '';
-  const rmT = S.riskmode === 'on' ? '⚡ RISK ON' : S.riskmode === 'off' ? '🛡 RISK OFF' : '—';
-  const rmC = S.riskmode === 'on' ? 'bull' : S.riskmode === 'off' ? 'bear' : '';
-  const gradeT = S._grade || '—';
-  const gradeColor = S._grade ? (['A+','A','A-','B+','B'].includes(S._grade) ? 'var(--cyan)' : 'var(--magenta)') : 'var(--muted)';
-
-  out.innerHTML = `
-    <div style="font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:var(--cyan);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;">
-      <span>$${ticker} GAMEPLAN · ${now.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}).toUpperCase()}</span>
-      <span style="font-size:18px;font-weight:900;color:${gradeColor};">${gradeT}</span>
-    </div>
-    <div class="gp-row" style="margin-bottom:8px"><span class="gp-key">CONDITIONS</span><span class="gp-val ${rmC}">${rmT}</span></div>
-    <hr class="gp-divider">
-    <div class="gp-row"><span class="gp-key">TREND</span><span class="gp-val ${tC}">${tT}</span></div>
-    <div class="gp-row"><span class="gp-key">ICHIMOKU</span><span class="gp-val ${ichiC}">${ichiT}</span></div>
-    <div class="gp-row"><span class="gp-key">50% FIB</span><span class="gp-val ${fib50C}">${fib50T}</span></div>
-    <div class="gp-row"><span class="gp-key">PDH/PDL</span><span class="gp-val ${pdhlC}">${pdhlT}</span></div>
-    <hr class="gp-divider">
-    <div class="gp-row"><span class="gp-key">PRICE ACTION</span><span class="gp-val ${aC}">${aT}</span></div>
-    <div class="gp-row"><span class="gp-key">ADX</span><span class="gp-val ${adxC}">${adxT}</span></div>
-    <hr class="gp-divider">
-    <div class="gp-row"><span class="gp-key">STOCK PRICE</span><span class="gp-val">${price ? '$'+parseFloat(price).toFixed(2) : '—'}</span></div>
-    <div class="gp-row"><span class="gp-key">TARGET</span><span class="gp-val">${targetT}</span></div>
-    <div class="gp-row"><span class="gp-key">EXP MOVE</span><span class="gp-val">${emT}</span></div>
-    ${contract ? '<div class="gp-row"><span class="gp-key">CONTRACT</span><span class="gp-val" style="color:var(--yellow)">' + contract + '</span></div>' : ''}
-    <div class="gp-row"><span class="gp-key">DELTA</span><span class="gp-val ${deltaC}">${deltaT}</span></div>
-    <hr class="gp-divider">
-    <div class="gp-row"><span class="gp-key">OVER</span><span class="gp-val bull">${over||'—'}</span></div>
-    <div class="gp-row"><span class="gp-key">UNDER</span><span class="gp-val bear">${under||'—'}</span></div>
-    <div class="gp-row"><span class="gp-key">OI CONFIRM</span><span class="gp-val ${oiC}">${oiT}</span></div>
-    <hr class="gp-divider">
-    <div class="gp-row"><span class="gp-key">SIGNAL</span><span class="gp-val">${sigT}</span></div>
-    <div class="gp-row"><span class="gp-key">ENTRY</span><span class="gp-val ${eC}">${eT}</span></div>
-    <div class="gp-row"><span class="gp-key">RISK</span><span class="gp-val ${riskC}">${riskT}</span></div>`;
+  // Just trigger grade recalc since sqz meter already updated above
 }
 
 function calcExpected() {
@@ -1378,22 +1274,27 @@ function saveTrifectaJournal() {
 // ── Snapshot helpers ──────────────────────────────────────────────
 function snapshotGameplan() {
   const sigLabels = {
-    '9x21up':'9×21 ▲','9x21dn':'9×21 ▼','4x8up':'4×8 ▲','4x8dn':'4×8 ▼',
-    'macdxup':'MACD ▲','macdxdn':'MACD ▼','ichibnc':'Ichi Bounce','ichirjt':'Ichi Reject',
+    '9x21up':'9x21 Up','9x21dn':'9x21 Down','4x8up':'4x8 Up','4x8dn':'4x8 Down',
+    'macdxup':'MACD Up','macdxdn':'MACD Down','ichibnc':'Ichi Bounce','ichirjt':'Ichi Reject',
     'fib50b':'50% Fib Bounce','fib618b':'61.8% Fib Bounce','fib50r':'50% Fib Reject',
     'fib618r':'61.8% Fib Reject','rvol':'RVOL'
   };
   return {
-    ticker:   document.getElementById('gp_ticker').value || '',
-    price:    document.getElementById('gp_price').value  || '',
-    target:   document.getElementById('gp_target').value || '',
-    contract: document.getElementById('gp_contract') ? document.getElementById('gp_contract').value : '',
+    ticker:   document.getElementById('j_ticker')?.value || '',
+    price:    document.getElementById('gp_price')?.value  || '',
+    target:   document.getElementById('gp_target')?.value || '',
+    contract: [
+      document.getElementById('j_ticker')?.value || '',
+      (document.getElementById('j_strike')?.value || '') + (S.entry === 'call' ? 'C' : S.entry === 'put' ? 'P' : ''),
+      document.getElementById('j_expiration')?.value || '',
+      document.getElementById('j_quantity')?.value ? '\u00d7' + document.getElementById('j_quantity').value : ''
+    ].filter(Boolean).join(' '),
     riskmode: S.riskmode,
     trend:    S.trend, fib50: S.fib50, ichimoku: S.ichimoku, pdhl: S.pdhl,
     action:   S.action, tf: [...S.tf], adx: S.adx,
-    em:       document.getElementById('gp_em').value || '',
-    over:     document.getElementById('gp_over').value || '',
-    under:    document.getElementById('gp_under').value || '',
+    em:       document.getElementById('gp_em')?.value || '',
+    over:     document.getElementById('gp_over')?.value || '',
+    under:    document.getElementById('gp_under')?.value || '',
     delta:    S.delta, oi_confirm: S.oi_confirm,
     sig:      S.sig.map(s => sigLabels[s] || s),
     entry:    S.entry, risk: S.risk,
@@ -1423,14 +1324,27 @@ function snapshotTrifecta() {
 function addJournalEntry() {
   const ticker = document.getElementById('j_ticker').value.trim().toUpperCase();
   if (!ticker) { alert('Enter a ticker!'); return; }
+  const strike     = document.getElementById('j_strike')?.value || '';
+  const expiration = document.getElementById('j_expiration')?.value || '';
+  const quantity   = document.getElementById('j_quantity')?.value || '';
   const entryPrice = document.getElementById('j_entry_price').value;
   const exitPrice  = document.getElementById('j_exit_price').value;
+  const callPut    = S.entry === 'call' ? 'C' : S.entry === 'put' ? 'P' : '';
+  // Auto-build contract string from parts
+  const contractStr = [
+    ticker,
+    strike ? strike + callPut : '',
+    expiration ? expiration : '',
+    quantity ? '\u00d7' + quantity : ''
+  ].filter(Boolean).join(' ');
+
   const entry = {
-    id: Date.now(), ticker,
+    id:          Date.now(),
+    ticker,
+    dateOpened:  document.getElementById('j_date_opened')?.value || '',
     date:        document.getElementById('j_date').value,
-    price:       document.getElementById('j_price').value,
-    targetPrice: document.getElementById('j_target_price').value,
-    contract:    document.getElementById('j_contract') ? document.getElementById('j_contract').value : '',
+    strike, expiration, quantity, callPut,
+    contract:    contractStr,
     entryPrice, exitPrice,
     outcome:     S.j_outcome,
     sqz:         S.j_sqz,
@@ -1439,20 +1353,14 @@ function addJournalEntry() {
     gpCorrect:   S.j_gp,
     followed:    S.j_follow,
     notes:       document.getElementById('j_notes').value,
-    gp:          S._pendingGP || snapshotGameplan(),
-    tf:          S._pendingTF || snapshotTrifecta(),
+    price:       document.getElementById('gp_price')?.value || '',
+    targetPrice: document.getElementById('gp_target')?.value || '',
+    gp:          snapshotGameplan(),
+    tf:          snapshotTrifecta(),
   };
   S.journal.unshift(entry);
   saveJournal();
-  // Reset form state
-  S.j_outcome = null; S.j_sqz = null; S.j_gp = null; S.j_follow = null; S.j_hit_pt = null;
-  S._pendingGP = null; S._pendingTF = null;
-  document.querySelectorAll('#journal .card .tog').forEach(b => b.classList.remove('on'));
-  ['j_ticker','j_price','j_target_price','j_contract','j_entry_price','j_exit_price','j_roi','j_notes'].forEach(id => {
-    const el = document.getElementById(id); if (el) el.value = '';
-  });
-  const disp = document.getElementById('j_roi_display');
-  if (disp) { disp.textContent = '—'; disp.style.color = 'var(--muted)'; }
+  resetJournalForm();
   renderJournal();
 }
 
@@ -1726,7 +1634,54 @@ function renderJournal() {
   }).join('');
 }
 
-// ── Inline edit helpers ───────────────────────────────────────────
+function liveCalcGrade() { calcGrade(); }
+
+function resetJournalForm() {
+  ['trend','action','fib50','ichimoku','pdhl','adx','delta','oi_confirm','entry','risk','riskmode',
+   'j_outcome','j_sqz','j_gp','j_follow','j_hit_pt','f_dir'].forEach(k => S[k] = null);
+  S.tf = []; S.sig = []; S.cat = [];
+  S.sk_bull_tf = []; S.sk_bull_sig = []; S.sk_bear_tf = []; S.sk_bear_sig = [];
+  S.triConf = [null,null,null]; S._grade = null; S._pendingGP = null; S._pendingTF = null;
+  document.querySelectorAll('#journal .card .tog').forEach(b => b.classList.remove('on'));
+  ['j_ticker','j_date_opened','j_date','j_strike','j_expiration','j_quantity',
+   'j_entry_price','j_exit_price','j_roi','j_notes','gp_price','gp_target','gp_em','gp_over','gp_under',
+   'f_callvol','f_putvol','f_catalyst','gp_entry_p','gp_target_p'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.value = '';
+  });
+  // Reset squeeze buttons
+  ['sqzInBtn','sqzOutBtn'].forEach(id => {
+    const btn = document.getElementById(id);
+    if (btn) { btn.style.background = 'transparent'; btn.style.fontWeight = ''; }
+  });
+  // Reset rvol
+  const rvolBtn = document.getElementById('rvolBtn');
+  if (rvolBtn) { rvolBtn.classList.remove('rvol-put','on'); rvolBtn.classList.add('rvol-call'); }
+  // Reset tri items
+  for (let i = 0; i < 3; i++) {
+    const item = document.getElementById('tri' + i);
+    const check = document.getElementById('triCheck' + i);
+    if (item) item.classList.remove('confirmed');
+    if (check) check.textContent = '—';
+  }
+  // Reset verdict
+  updateTrifecta();
+  // Reset sqz meter
+  const sqzWrap = document.getElementById('sqzMeterWrap');
+  if (sqzWrap) sqzWrap.style.display = 'none';
+  // Reset ROI display
+  const roiDisp = document.getElementById('j_roi_display');
+  if (roiDisp) { roiDisp.style.display = 'none'; roiDisp.textContent = ''; }
+  const gradeDisplay = document.getElementById('gradeDisplay');
+  if (gradeDisplay) gradeDisplay.style.display = 'none';
+  const riskNote = document.getElementById('riskModeNote');
+  if (riskNote) riskNote.style.display = 'none';
+  const expCalc = document.getElementById('expectedCalc');
+  if (expCalc) expCalc.style.display = 'none';
+  const roiResult = document.getElementById('roiResult');
+  if (roiResult) roiResult.textContent = '—';
+  const flowRatio = document.getElementById('flowRatio');
+  if (flowRatio) flowRatio.textContent = '';
+}
 const _editState = {};
 
 function toggleEdit(id) {
@@ -1800,13 +1755,13 @@ function saveEdit(id) {
 
 updateGameplan();
 updateTrifecta();
-document.getElementById('triBody0').style.display = 'block';
 const todayStr = now.toISOString().split('T')[0];
 const jDate = document.getElementById('j_date');
 if (jDate) jDate.value = todayStr;
+const jDateOpened = document.getElementById('j_date_opened');
+if (jDateOpened) jDateOpened.value = todayStr;
 const gd = document.getElementById('gradeDisplay');
 if (gd) gd.style.display = 'none';
-// Load journal from persistent storage
 loadJournal();
 </script>
 
