@@ -7,19 +7,19 @@
 <title>🔥 Trading Gameplan and Checklist</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #ffffff;
-    --surface: #f5f6fa;
-    --card: #fafbff;
-    --border: #e2e4f0;
-    --cyan: #0077cc;
-    --magenta: #cc00aa;
-    --green: #00a855;
-    --red: #e02040;
-    --yellow: #cc8800;
-    --orange: #e05a00;
-    --text: #1a1a2e;
-    --muted: #7a7a9a;
+    :root {
+    --bg: #0d0f14;
+    --surface: #161923;
+    --card: #1a1d2a;
+    --border: #2a2d3e;
+    --cyan: #00c2ff;
+    --magenta: #e040c8;
+    --green: #00d47a;
+    --red: #ff3a5c;
+    --yellow: #ffb800;
+    --orange: #ff7a2f;
+    --text: #e8eaf2;
+    --muted: #6b7099;
   }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -35,9 +35,9 @@ body {
 .header {
   padding: 18px 16px 12px;
   text-align: center;
-  background: linear-gradient(135deg, rgba(0,119,204,0.07) 0%, rgba(204,0,170,0.05) 100%);
+  background: linear-gradient(135deg, rgba(0,194,255,0.08) 0%, rgba(224,64,200,0.06) 100%);
   border-bottom: 2px solid;
-  border-image: linear-gradient(90deg, var(--cyan), var(--magenta)) 1;
+  border-image: linear-gradient(90deg, var(--cyan), var(--magenta)) 1; border-bottom-color: transparent;
 }
 
 .fire-badge {
@@ -69,7 +69,7 @@ body {
 
 .tabs {
   display: flex;
-  background: white;
+  background: #13151f;
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
@@ -93,7 +93,7 @@ body {
 .tab.active {
   color: var(--cyan);
   border-bottom-color: var(--cyan);
-  background: rgba(0,119,204,0.03);
+  background: rgba(0,194,255,0.06);
 }
 
 .page { display: none; padding: 12px 14px; }
@@ -152,12 +152,12 @@ body {
 }
 
 .step-pill {
-  background: linear-gradient(90deg, rgba(0,119,204,0.12), rgba(204,0,170,0.08));
+  background: linear-gradient(90deg, rgba(0,194,255,0.15), rgba(224,64,200,0.12));
   border-radius: 4px;
   padding: 2px 8px;
   font-size: 9px;
   color: var(--cyan);
-  border: 1px solid rgba(0,119,204,0.2);
+  border: 1px solid rgba(0,194,255,0.18);
 }
 
 .tog-row { display: flex; gap: 6px; flex-wrap: wrap; }
@@ -277,16 +277,16 @@ body {
 .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--muted); }
 
 .verdict-banner { border-radius: 8px; padding: 14px; text-align: center; margin-top: 14px; border: 1px solid var(--border); transition: all 0.4s; }
-.verdict-banner.fire   { border-color: var(--cyan);    background: rgba(0,119,204,0.05); }
-.verdict-banner.wait   { border-color: var(--yellow);  background: rgba(204,136,0,0.04); }
-.verdict-banner.pass   { border-color: var(--magenta); background: rgba(204,0,170,0.04); }
+.verdict-banner.fire   { border-color: var(--cyan);    background: rgba(0,194,255,0.07); }
+.verdict-banner.wait   { border-color: var(--yellow);  background: rgba(255,184,0,0.07); }
+.verdict-banner.pass   { border-color: var(--magenta); background: rgba(224,64,200,0.07); }
 
 .verdict-title { font-family: 'Orbitron', monospace; font-size: 20px; font-weight: 900; letter-spacing: 3px; }
 .verdict-sub   { font-size: 10px; color: var(--muted); letter-spacing: 1px; margin-top: 4px; }
 
 .belief-box {
-  background: linear-gradient(135deg, rgba(0,119,204,0.04), rgba(204,0,170,0.03));
-  border: 1px solid rgba(0,119,204,0.2);
+  background: linear-gradient(135deg, rgba(0,194,255,0.06), rgba(224,64,200,0.04));
+  border: 1px solid rgba(0,194,255,0.18);
   border-radius: 10px;
   padding: 14px;
   margin-bottom: 14px;
@@ -333,7 +333,7 @@ body {
       <div style="font-family:'Orbitron',monospace;font-size:7px;letter-spacing:1px;color:var(--muted);">TOTAL P&L</div>
       <div style="font-family:'Orbitron',monospace;font-size:15px;font-weight:700;margin-top:4px;" id="statPnl">—</div>
     </div>
-    <div style="background:linear-gradient(135deg,rgba(0,119,204,0.08),rgba(204,0,170,0.06));border-radius:10px;padding:10px 8px;text-align:center;border:1px solid rgba(0,119,204,0.2);box-shadow:0 1px 4px rgba(0,0,0,0.04);">
+    <div style="background:linear-gradient(135deg,rgba(0,194,255,0.1),rgba(224,64,200,0.08));border-radius:10px;padding:10px 8px;text-align:center;border:1px solid rgba(0,194,255,0.25);box-shadow:0 1px 4px rgba(0,0,0,0.04);">
       <div style="font-family:'Orbitron',monospace;font-size:7px;letter-spacing:1px;color:var(--cyan);">WIN RATE</div>
       <div style="font-family:'Orbitron',monospace;font-size:15px;font-weight:700;color:var(--cyan);margin-top:4px;" id="statWR">—</div>
     </div>
@@ -435,7 +435,7 @@ body {
     <div style="height:1px;background:linear-gradient(90deg,rgba(0,119,204,0.3),rgba(204,0,170,0.2),transparent);margin:14px 0;"></div>
 
     <!-- RISK ACKNOWLEDGED -->
-    <div style="padding:12px;background:linear-gradient(135deg,rgba(0,119,204,0.06),rgba(204,0,170,0.04));border-radius:8px;border:1px solid rgba(0,119,204,0.2);">
+    <div style="padding:12px;background:linear-gradient(135deg,rgba(0,194,255,0.08),rgba(224,64,200,0.05));border-radius:8px;border:1px solid rgba(0,194,255,0.25);">
       <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--cyan);margin-bottom:8px;">&#9888; RISK RULES ACKNOWLEDGED?</div>
       <div class="tog-row">
         <button class="tog cyn" onclick="pick(this,'risk','yes'); liveCalcGrade()">&#10003; Acknowledged</button>
@@ -755,8 +755,8 @@ body {
   </div>
 
   <div class="slabel">Risk Rules</div>
-  <div class="card" style="border-color:rgba(224,90,0,0.2);background:#f7f7fb;">
-    <div style="display:flex;flex-direction:column;gap:12px;font-size:11px;line-height:1.7;color:#1a1a2e;">
+  <div class="card" style="border-color:rgba(224,90,0,0.2);background:var(--surface);">
+    <div style="display:flex;flex-direction:column;gap:12px;font-size:11px;line-height:1.7;color:var(--text);">
       <div style="border-left:3px solid var(--cyan);padding-left:10px;">
         <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--cyan);margin-bottom:3px">POSITION SIZE</div>
         Risk <strong style="color:var(--cyan)">5-10% of your account</strong> per trade. Never go all-in. Protect your capital first.
@@ -889,14 +889,14 @@ function pick(el, key, val) {
     const note = document.getElementById('riskModeNote');
     note.style.display = 'block';
     if (val === 'on') {
-      note.style.background = 'rgba(0,119,204,0.08)';
+      note.style.background = 'rgba(0,194,255,0.1)';
       note.style.color = 'var(--cyan)';
-      note.style.border = '1px solid rgba(0,119,204,0.25)';
+      note.style.border = '1px solid rgba(0,194,255,0.3)';
       note.textContent = '⚡ Risk On — Full setups, normal position sizing. Look for high conviction trifecta entries.';
     } else {
-      note.style.background = 'rgba(204,0,170,0.06)';
+      note.style.background = 'rgba(224,64,200,0.1)';
       note.style.color = 'var(--magenta)';
-      note.style.border = '1px solid rgba(204,0,170,0.25)';
+      note.style.border = '1px solid rgba(224,64,200,0.3)';
       note.textContent = '🛡 Risk Off — Reduce size, be selective. Only A+ setups. Consider sitting out if no clear signal.';
     }
   }
